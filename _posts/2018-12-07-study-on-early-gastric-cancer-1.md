@@ -5,6 +5,7 @@
 地址1：大连医科大学第一附属医院胃肠病科
 
 地址2：大连市中心医院
+
 [paper](https://bmcgastroenterol.biomedcentral.com/articles/10.1186/1471-230X-11-135 "Application of magnifying narrow-band imaging endoscopy for diagnosis of early gastric cancer and precancerous lesion")
 
 －－－－
