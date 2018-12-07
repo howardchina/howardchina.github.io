@@ -1,7 +1,9 @@
 ### Application of magnifying narrow-band imaging endoscopy for diagnosis of early gastric cancer and precancerous lesion.
 ### M-NBI内窥镜在早期胃癌和早癌病灶检测上的应用
 作者：JingZhang 1,2, Shi-Bin Guo 1 和 Zhi-Jun Duan 1*
+
 地址1：大连医科大学第一附属医院胃肠病科
+
 地址2：大连市中心医院
 [paper](https://bmcgastroenterol.biomedcentral.com/articles/10.1186/1471-230X-11-135 "Application of magnifying narrow-band imaging endoscopy for diagnosis of early gastric cancer and precancerous lesion")
 
