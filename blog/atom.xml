@@ -11,7 +11,7 @@ layout: feed
  <id>http://howardchina.github.io/blog</id>
  <author>
    <name>Qi He</name>
-   <email>howardchina@gmail.com</email>
+   <email>howardchina12@gmail.com</email>
  </author>
 
  {% for post in site.posts %}
