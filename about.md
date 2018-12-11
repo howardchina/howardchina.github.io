@@ -3,14 +3,10 @@ layout: page
 title: About
 permalink: /about/
 ---
+Currently, I'm PhD candidate in Mechanical Engineering at [Tianjin University](http://www.tju.edu.cn/english/ "Tianjin University"). My advisor is [Dr. Siyang Zuo](http://me.tju.edu.cn/faculty_teachers.action?cla=5&teacherid=1890 "Dr. Siyang Zuo").
 
-<div class="about">
-	<!-- <h1>About</h1> -->
-	<p>Currently I'm PhD graduate student major in Mechanical Engineering at <a href="http://www.tju.edu.cn/english/">Tianjin University</a>, China.</p>
-	<p>I recieved Bachelor degree of Software Engineering and Master degree of Computer Science from <a href="http://en.csu.edu.cn/">Central South University</a>, China, have participated in the ACM-ICPC competition and won the gold medal in the Reginals.</p>
-	<ul class="contacts">
-		<li><a href="#">howard_work at qq dot com</a></li>
-		<li><a href="http://moemted.tju.edu.cn/">Key Laboratory of Mechanism Theory and Equipment Design (Tianjin University), Ministry of Education</a></li>
-		<li><a href="http://sise.csu.edu.cn/English_Homepage.htm">School of Information Science and Engineering (Central South University) </a></li>
-	</ul>
-</div>
+I recieved Bachelor degree of Software Engineering and Master degree of Computer Science from [Central South University](http://en.csu.edu.cn/ "Central South University"), have participated in the ACM-ICPC competition and won the gold medal in the Reginals.
+
+
+* [howard_work at qq dot com](mailto:howard_work@qq.com "howard_work at qq dot com")/[howardchina12 at gmail dot com](mailto:howardchina12@gmail.com "howardchina12 at gmail dot com")
+* Address (now): [Key Laboratory of Mechanism Theory and Equipment Design -Tianjin University](http://moemted.tju.edu.cn/ "Key Laboratory of Mechanism Theory and Equipment Design -Tianjin University (now)")

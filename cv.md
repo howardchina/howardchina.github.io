@@ -16,7 +16,7 @@ permalink: /cv/
 	<h2>Education</h2>
 	<ul>
 		<li><strong>Tianjin University, Tianjin, China</strong><br>
-			Ph.D student in Mechanical Engineering, School of Mechanical Engineering<br>
+			PhD student in Mechanical Engineering, School of Mechanical Engineering<br>
 			Sep. 2018 ~ present<br>
 			Dissertation: Identification and Automatic Diagnosis of Lesions for Robotic Surgery.<br>
 			Advisors: <a href="http://me.tju.edu.cn/faculty_teachers.action?cla=5&teacherid=1890">Dr. Siyang Zuo</a></li>
@@ -60,7 +60,7 @@ permalink: /cv/
 			<strong> Huanle Entertainment (Shanghai)Technology Co.,Ltd.</strong>,Shanghai, China<br>    
 			Game Developer Intern<br>
 			Dec. 2014 ~ Mar. 2015<br>
-			Developed some game demos with cocos, flash, unity(<a href="/photo/#GamDevInt">read more</a>).
+			Developed some game demos with cocos, flash, unity(<a href="#GamDevInt">read more</a>).
 		</li>
 	</ol>
 	<h2>Selected International Conference Publications</h2>
