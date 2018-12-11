@@ -5,37 +5,37 @@ date:   2018-12-11 21:02:00 +0800
 category: [proposals]
 ---
 
-| Method           | backbone      | test size | VOC2007 | VOC2010 | VOC2012 | ILSVRC 2013 | MSCOCO 2015                     | Speed                          |
-| :------------:   | :-----:       | :-----:   | :-----: | :-----: | :-----: | :---------: | :---------:                     | :---------:                    |
-| OverFeat         |               |           |         |         |         | 24.3%       |                                 |                                |
-| R-CNN            | AlexNet       |           | 58.5%   | 53.7%   | 53.3%   | 31.4%       |                                 |                                |
-| R-CNN            | VGG16         |           | 66.0%   |         |         |             |                                 |                                |
-| SPP_net          | ZF-5          |           | 54.2%   |         |         | 31.84%      |                                 |                                |
-| DeepID-Net       |               |           | 64.1%   |         |         | 50.3%       |                                 |                                |
-| NoC              | 73.3%         |           | 68.8%   |         |         |             |                                 |                                |
-| Fast-RCNN        | VGG16         |           | 70.0%   | 68.8%   | 68.4%   |             | 19.7%(@[0.5-0.95]), 35.9%(@0.5) |                                |
-| MR-CNN           | 78.2%         |           | 73.9%   |         |         |             |                                 |                                |
-| Faster-RCNN      | VGG16         |           | 78.8%   |         | 75.9%   |             | 21.9%(@[0.5-0.95]), 42.7%(@0.5) | 198ms                          |
-| Faster-RCNN      | ResNet101     |           | 85.6%   |         | 83.8%   |             | 37.4%(@[0.5-0.95]), 59.0%(@0.5) |                                |
-| YOLO             |               |           | 63.4%   |         | 57.9%   |             |                                 | 45 fps                         |
-| YOLO VGG-16      |               |           | 66.4%   |         |         |             |                                 | 21 fps                         |
-| YOLOv2           |               | 448x448   | 78.6%   |         | 73.4%   |             | 21.6%(@[0.5-0.95]), 44.0%(@0.5) | 40 fps                         |
-| SSD              | VGG16         | 300x300   | 77.2%   |         | 75.8%   |             | 25.1%(@[0.5-0.95]), 43.1%(@0.5) | 46 fps                         |
-| SSD              | VGG16         | 512x512   | 79.8%   |         | 78.5%   |             | 28.8%(@[0.5-0.95]), 48.5%(@0.5) | 19 fps                         |
-| SSD              | ResNet101     | 300x300   |         |         |         |             | 28.0%(@[0.5-0.95])              | 16 fps                         |
-| SSD              | ResNet101     | 512x512   |         |         |         |             | 31.2%(@[0.5-0.95])              | 8 fps                          |
-| DSSD             | ResNet101     | 300x300   |         |         |         |             | 28.0%(@[0.5-0.95])              | 8 fps                          |
-| DSSD             | ResNet101     | 500x500   |         |         |         |             | 33.2%(@[0.5-0.95])              | 6 fps                          |
-| ION              |               |           | 79.2%   |         | 76.4%   |             |                                 |                                |
-| CRAFT            |               |           | 75.7%   |         | 71.3%   | 48.5%       |                                 |                                |
-| OHEM             |               |           | 78.9%   |         | 76.3%   |             | 25.5%(@[0.5-0.95]), 45.9%(@0.5) |                                |
-| R-FCN            | ResNet50      |           | 77.4%   |         |         |             |                                 | 0.12sec(K40), 0.09sec(TitianX) |
-| R-FCN            | ResNet101     |           | 79.5%   |         |         |             |                                 | 0.17sec(K40), 0.12sec(TitianX) |
-| R-FCN(ms train)  | ResNet101     |           | 83.6%   |         | 82.0%   |             | 31.5%(@[0.5-0.95]), 53.2%(@0.5) |                                |
-| PVANet 9.0       |               |           | 84.9%   |         | 84.2%   |             |                                 | 750ms(CPU), 46ms(TitianX)      |
-| RetinaNet        | ResNet101-FPN |           |         |         |         |             |                                 |                                |
-| Light-Head R-CNN | Xception\*    | 800/1200  |         |         |         |             | 31.5%@[0.5:0.95]                | 95 fps                         |
-| Light-Head R-CNN | Xception\*    | 700/1100  |         |         |         |             | 30.7%@[0.5:0.95]                | 102 fps                        |
+|      Method      |   backbone    | test size | VOC2007 | VOC2010 | VOC2012 | ILSVRC 2013 |           MSCOCO 2015           |             Speed              |
+| :--------------: | :-----------: | :-------: | :-----: | :-----: | :-----: | :---------: | :-----------------------------: | :----------------------------: |
+|     OverFeat     |               |           |         |         |         |    24.3%    |                                 |                                |
+|      R-CNN       |    AlexNet    |           |  58.5%  |  53.7%  |  53.3%  |    31.4%    |                                 |                                |
+|      R-CNN       |     VGG16     |           |  66.0%  |         |         |             |                                 |                                |
+|     SPP_net      |     ZF-5      |           |  54.2%  |         |         |   31.84%    |                                 |                                |
+|    DeepID-Net    |               |           |  64.1%  |         |         |    50.3%    |                                 |                                |
+|       NoC        |     73.3%     |           |  68.8%  |         |         |             |                                 |                                |
+|    Fast-RCNN     |     VGG16     |           |  70.0%  |  68.8%  |  68.4%  |             | 19.7%(@[0.5-0.95]), 35.9%(@0.5) |                                |
+|      MR-CNN      |     78.2%     |           |  73.9%  |         |         |             |                                 |                                |
+|   Faster-RCNN    |     VGG16     |           |  78.8%  |         |  75.9%  |             | 21.9%(@[0.5-0.95]), 42.7%(@0.5) |             198ms              |
+|   Faster-RCNN    |   ResNet101   |           |  85.6%  |         |  83.8%  |             | 37.4%(@[0.5-0.95]), 59.0%(@0.5) |                                |
+|       YOLO       |               |           |  63.4%  |         |  57.9%  |             |                                 |             45 fps             |
+|   YOLO VGG-16    |               |           |  66.4%  |         |         |             |                                 |             21 fps             |
+|      YOLOv2      |               |  448x448  |  78.6%  |         |  73.4%  |             | 21.6%(@[0.5-0.95]), 44.0%(@0.5) |             40 fps             |
+|       SSD        |     VGG16     |  300x300  |  77.2%  |         |  75.8%  |             | 25.1%(@[0.5-0.95]), 43.1%(@0.5) |             46 fps             |
+|       SSD        |     VGG16     |  512x512  |  79.8%  |         |  78.5%  |             | 28.8%(@[0.5-0.95]), 48.5%(@0.5) |             19 fps             |
+|       SSD        |   ResNet101   |  300x300  |         |         |         |             |       28.0%(@[0.5-0.95])        |             16 fps             |
+|       SSD        |   ResNet101   |  512x512  |         |         |         |             |       31.2%(@[0.5-0.95])        |             8 fps              |
+|       DSSD       |   ResNet101   |  300x300  |         |         |         |             |       28.0%(@[0.5-0.95])        |             8 fps              |
+|       DSSD       |   ResNet101   |  500x500  |         |         |         |             |       33.2%(@[0.5-0.95])        |             6 fps              |
+|       ION        |               |           |  79.2%  |         |  76.4%  |             |                                 |                                |
+|      CRAFT       |               |           |  75.7%  |         |  71.3%  |    48.5%    |                                 |                                |
+|       OHEM       |               |           |  78.9%  |         |  76.3%  |             | 25.5%(@[0.5-0.95]), 45.9%(@0.5) |                                |
+|      R-FCN       |   ResNet50    |           |  77.4%  |         |         |             |                                 | 0.12sec(K40), 0.09sec(TitianX) |
+|      R-FCN       |   ResNet101   |           |  79.5%  |         |         |             |                                 | 0.17sec(K40), 0.12sec(TitianX) |
+| R-FCN(ms train)  |   ResNet101   |           |  83.6%  |         |  82.0%  |             | 31.5%(@[0.5-0.95]), 53.2%(@0.5) |                                |
+|    PVANet 9.0    |               |           |  84.9%  |         |  84.2%  |             |                                 |   750ms(CPU), 46ms(TitianX)    |
+|    RetinaNet     | ResNet101-FPN |           |         |         |         |             |                                 |                                |
+| Light-Head R-CNN |  Xception\*   | 800/1200  |         |         |         |             |        31.5%@[0.5:0.95]         |             95 fps             |
+| Light-Head R-CNN |  Xception\*   | 700/1100  |         |         |         |             |        30.7%@[0.5:0.95]         |            102 fps             |
 
 # Papers
 
@@ -229,7 +229,7 @@ category: [proposals]
 
 **You Only Look Once: Unified, Real-Time Object Detection**
 
-![](https://camo.githubusercontent.com/e69d4118b20a42de4e23b9549f9a6ec6dbbb0814/687474703a2f2f706a7265646469652e636f6d2f6d656469612f66696c65732f6461726b6e65742d626c61636b2d736d616c6c2e706e67)
+![](/static/img/posts/yolo.png)
 
 - arxiv: [http://arxiv.org/abs/1506.02640](http://arxiv.org/abs/1506.02640)
 - code: [http://pjreddie.com/darknet/yolo/](http://pjreddie.com/darknet/yolo/)
@@ -253,7 +253,7 @@ category: [proposals]
 
 **Start Training YOLO with Our Own Data**
 
-![](http://guanghan.info/blog/en/wp-content/uploads/2015/12/images-40.jpg)
+![](/static/img/posts/images-40.jpg)
 
 - intro: train with customized data and class numbers/labels. Linux / Windows version for darknet.
 - blog: [http://guanghan.info/blog/en/my-works/train-yolo/](http://guanghan.info/blog/en/my-works/train-yolo/)
@@ -341,7 +341,7 @@ category: [proposals]
 
 **SSD: Single Shot MultiBox Detector**
 
-![](https://camo.githubusercontent.com/ad9b147ed3a5f48ffb7c3540711c15aa04ce49c6/687474703a2f2f7777772e63732e756e632e6564752f7e776c69752f7061706572732f7373642e706e67)
+![](/static/img/posts/ssd.png)
 
 - intro: ECCV 2016 Oral
 - arxiv: [http://arxiv.org/abs/1512.02325](http://arxiv.org/abs/1512.02325)
@@ -707,7 +707,7 @@ Continuation of [arXiv:1608.08021](https://arxiv.org/abs/1608.08021)
 
 **DSOD: Learning Deeply Supervised Object Detectors from Scratch**
 
-![](https://user-images.githubusercontent.com/3794909/28934967-718c9302-78b5-11e7-89ee-8b514e53e23c.png)
+![](/static/img/posts/28934967-718c9302-78b5-11e7-89ee-8b514e53e23c.png)
 
 - intro: ICCV 2017. Fudan University & Tsinghua University & Intel Labs China
 - arxiv: [https://arxiv.org/abs/1708.01241](https://arxiv.org/abs/1708.01241)
@@ -1383,7 +1383,7 @@ This task involves predicting the salient regions of an image given by human eye
 
 **Unconstrained Salient Object Detection via Proposal Subset Optimization**
 
-![](http://cs-people.bu.edu/jmzhang/images/pasted%20image%201465x373.jpg)
+![](/static/img/posts/pasted%20image%201465x373.jpg)
 
 - intro: CVPR 2016
 - project page: [http://cs-people.bu.edu/jmzhang/sod.html](http://cs-people.bu.edu/jmzhang/sod.html)
@@ -1397,7 +1397,7 @@ This task involves predicting the salient regions of an image given by human eye
 
 **Salient Object Subitizing**
 
-![](http://cs-people.bu.edu/jmzhang/images/frontpage.png?crc=123070793)
+![](/static/img/posts/frontpage.png)
 
 - intro: CVPR 2015
 - intro: predicting the existence and the number of salient objects in an image using holistic cues
@@ -1610,7 +1610,7 @@ This task involves predicting the salient regions of an image given by human eye
 
 **From Facial Parts Responses to Face Detection: A Deep Learning Approach**
 
-![](http://personal.ie.cuhk.edu.hk/~ys014/projects/Faceness/support/index.png)
+![](/static/img/posts/faceness.png)
 
 - intro: ICCV 2015. CUHK
 - project page: [http://personal.ie.cuhk.edu.hk/~ys014/projects/Faceness/Faceness.html](http://personal.ie.cuhk.edu.hk/~ys014/projects/Faceness/Faceness.html)
@@ -1673,7 +1673,7 @@ This task involves predicting the salient regions of an image given by human eye
 
 **Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Neural Networks**
 
-![](https://kpzhang93.github.io/MTCNN_face_detection_alignment/support/index.png)
+![](/static/img/posts/index.png)
 
 - project page: [https://kpzhang93.github.io/MTCNN_face_detection_alignment/index.html](https://kpzhang93.github.io/MTCNN_face_detection_alignment/index.html)
 - arxiv: [https://arxiv.org/abs/1604.02878](https://arxiv.org/abs/1604.02878)
@@ -2122,7 +2122,7 @@ This task involves predicting the salient regions of an image given by human eye
 
 **Object Skeleton Extraction in Natural Images by Fusing Scale-associated Deep Side Outputs**
 
-![](https://camo.githubusercontent.com/88a65f132aa4ae4b0477e3ad02c13cdc498377d9/687474703a2f2f37786e37777a2e636f6d312e7a302e676c622e636c6f7564646e2e636f6d2f44656570536b656c65746f6e2e706e673f696d61676556696577322f322f772f353030)
+![](/static/img/posts/overal_arch.png)
 
 - arxiv: [http://arxiv.org/abs/1603.09446](http://arxiv.org/abs/1603.09446)
 - github: [https://github.com/zeakey/DeepSkeleton](https://github.com/zeakey/DeepSkeleton)
@@ -2198,7 +2198,7 @@ This task involves predicting the salient regions of an image given by human eye
 
 **OSMDeepOD - OSM and Deep Learning based Object Detection from Aerial Imagery (formerly known as "OSM-Crosswalk-Detection")**
 
-![](https://raw.githubusercontent.com/geometalab/OSMDeepOD/master/imgs/process.png)
+![](/static/img/posts/process.png)
 
 - github: [https://github.com/geometalab/OSMDeepOD](https://github.com/geometalab/OSMDeepOD)
 
@@ -2387,7 +2387,7 @@ This task involves predicting the salient regions of an image given by human eye
 
 **Learning Deep Features for Discriminative Localization**
 
-![](http://cnnlocalization.csail.mit.edu/framework.jpg)
+![](/static/img/posts/framework.jpg)
 
 - homepage: [http://cnnlocalization.csail.mit.edu/](http://cnnlocalization.csail.mit.edu/)
 - arxiv: [http://arxiv.org/abs/1512.04150](http://arxiv.org/abs/1512.04150)
@@ -2397,7 +2397,7 @@ This task involves predicting the salient regions of an image given by human eye
 
 **ContextLocNet: Context-Aware Deep Network Models for Weakly Supervised Localization**
 
-![](http://www.di.ens.fr/willow/research/contextlocnet/model.png)
+![](/static/img/posts/model.png)
 
 - intro: ECCV 2016
 - project page: [http://www.di.ens.fr/willow/research/contextlocnet/](http://www.di.ens.fr/willow/research/contextlocnet/)
