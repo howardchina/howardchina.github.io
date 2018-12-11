@@ -10,8 +10,7 @@ permalink: /cv/
 		<strong>Key Laboratory of Mechanism Theory and Equipment Design (Tianjin University), Ministry of Education</strong><br>
 		135#, Yaguan Road, Jinnan District<br>
 		Tianjin, China, 300350<br>
-		<abbr title="phone">P:</abbr> (86) 185-7312-2712<br>
-		<span class="obfuscate">heqi_work at qq dot com or howardchina12 at gmail dot com</span>
+		<span class="obfuscate">heqi_work at qq dot com / howardchina12 at gmail dot com</span>
 	</address>
 	<h2>Education</h2>
 	<ul>
@@ -24,7 +23,7 @@ permalink: /cv/
 			Master of Computer Science, School of Information Science and Engineering <br>
 			Sept. 2015 - Jun. 2018<br>
 			Dissertation: Automatic Retinal Vessel Segmentation for Retinal Image.<br>
-			Advisors: <a href="http://202.197.61.251/sisehr/blog.jsp?lg=204194">Dr. Beiji Zou</a></li>
+			Advisors: <a href="http://computer.csu.xk.hnlat.com/index.php?m=currency&c=scholar&a=show&catid=414&id=343818">Dr. Beiji Zou</a></li>
 		<li><strong>Central South University, Changsha, China</strong><br>
 			Bachelor of Software Engineering, School of Software Engineering<br>
 			Sept. 2011 - Jun. 2015<br>
