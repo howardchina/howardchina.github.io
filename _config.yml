@@ -1,3 +1,59 @@
-name: Qi He
+title: Brain is the new sexy
+description: Thanks to Yafei
+author: Howard He
+github: https://github.com/howardchina
+about: I am researcher. Currently doing more in Computer Vision, focused in Deep CNN and Medical Imaging.
+disqus_shortname: brainisthenewsexy
+google_analytics: none
+avatar_url: /static/img/avatar.jpg
+
+enableTags: true
+tagarray: []
+
+collections:
+  project:
+    output: true
+    permalink: /project/:path/
+
+social:
+    - icon: fa-facebook
+      link: "#"
+    - icon: fa-twitter
+      link: "https://twitter.com/howardchina12"
+    - icon: fa-linkedin
+      link: "https://www.linkedin.com/in/howardchina"
+    - icon: fa-stack-exchange
+      link: "#"
+    - icon: fa-github
+      link: "https://github.com/howardchina"
+
+share:
+  twitter_username: howardchina12
+  fb_appid: 528977307581187
+
+urls:
+    - text: About Me
+      url: /about/
+    - text: Curriculum Vitae
+      url: /cv/
+    - text: My Projects
+      url: /projects/
+    - text: XML Feed
+      url: /feed.xml
+
+url: "https://howardchina.github.io"
+baseurl: ""
+paginate: 20
+per_page: 20
+paginate_path: "/page/:num/"
 markdown: kramdown
-permalink: /blog/:year/:month/:day/:title
+gems:
+  - jekyll-paginate
+  - jekyll-gist
+
+compress_html:
+  clippings: all
+  comments: ["<!-- ", " -->"]
+  endings: all
+  ignore:
+    envs: ['development']

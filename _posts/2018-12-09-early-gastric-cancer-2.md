@@ -1,3 +1,10 @@
+---
+layout: post
+title: An efficient diagnostic strategy for small, depressed early gastric cancer with magnifying narrow band imaging--a post-hoc analysis of a prospective randomized controlled trial
+date:   2018-12-09 16:12:00 +0800
+categories: [nbi, gastric endoscopy]
+---
+
 ### An efficient diagnostic strategy for small, depressed early gastric cancer with magnifying narrow-band imaging: a post-hoc analysis of a prospective randomized controlled trial
 
 ### 使用放大窄带成像的小型潜伏早期胃癌的有效诊断策略：前瞻性随机对照试验的事后分析

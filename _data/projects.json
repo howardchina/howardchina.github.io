@@ -1,0 +1,25 @@
+[	
+	{
+		"slug": "vessel-segmentation",
+		"name": "Vessel Segmentation",
+		"image": "vesSeg.png",
+		"url": "https://github.com/howardchina/MULTI-LABEL-CLASSIFICATION-SCHEME-BASED-ON-LOCAL-REGRESSION-FOR-RETINAL-VESSEL-SEGMENTATION",
+		"date": "Oct 2018",
+		"tags": ["Python","Keras", "ICIP2018"]
+	},
+	{
+		"slug": "bgidb",
+		"name": "BGIDB",
+		"image": "b-spline.gif",
+		"url": "https://github.com/howardchina/BGIDB",
+		"date": "Jan 2017",
+		"tags": ["JS","PHP"]
+	},
+	{
+		"name": "Solutions[ACM-ICIP]",
+		"image": "ICPC.png",
+		"url": "https://github.com/howardchina/ACM-ICPC-solved-problem",
+		"date": "Dec 2015",
+		"tags": ["C","C++"]
+	}
+]
