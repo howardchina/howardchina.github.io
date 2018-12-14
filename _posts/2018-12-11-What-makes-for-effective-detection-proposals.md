@@ -24,4 +24,6 @@ categories: [proposals]
 
 detection proposals被用于PASCAL和ImageNet上表现最顶尖的目标检测方法中。除了让更复杂的分类器能使用，它改变了分类器将处理的数据的分布，并可能通过减少假阳性来提高检测质量。
 
-大部分描述生成detection proposals 的文献只用了很局限的评估方法，只在一小部分衡量标准、数据库和方法上评估。
+大部分描述生成detection proposals 的文献只用了很局限的评估方法，只在一小部分衡量标准、数据库和方法上评估。本文会在一个统一的框架上比较大部分代码公开的方法。
+
+贡献：第二章 review，分类讨论；第三章 repeatability；第四章研究目标召回率，用 PASCAL VOC2007测试集和ImageNet2013和MS COCO2014验证集，比之前的工作实验范围更广；第五章评估不同 proposal 方法在 DPM, R-CNN, Fast R-CNN上的性能，并发现 AR（平均召回） 和检测性能高度一致。
