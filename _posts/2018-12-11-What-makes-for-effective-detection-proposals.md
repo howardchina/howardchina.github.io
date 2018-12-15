@@ -17,6 +17,8 @@ categories: [proposals]
 
 **关键词**：Computer Vision, objection detection, detection proposals.
 
+[Github](https://github.com/hosang/detection-proposals)
+[Offical Page](multimodal-computing/research/object-recognition-and-scene-understanding/how-good-are-detection-proposals-really/)
 
 1.**简介**
 
