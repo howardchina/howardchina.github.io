@@ -124,4 +124,16 @@ Proposal 的可重复能力
 
 proposal 会改变正负窗口的分布，在第4章讨论在正样本中的 proposal 与 groundtruth 的重叠率。本章分析负样本的分布：如果 proposal 方法不能在 **相似的图像内容** 上，比如没有目标的内容或者有部分目标的内容上，**产生一致的窗口**，分类器就没办法对负样本打分。考虑极端情况，训练集中的 proposal 必包含目标，而测试集的 proposal 有目标和负样本，这样训练出来的分类器对于负样本的打分没有意义。因此认为，在背景上产生一致分布的 proposal 也会影响检测。
 
-repeatability 就是在相似图像内容上产生 proposals 的性质。直觉上，不同图片上应该产生相似内容的 proposals 。设计实验，比较 proposals 和在修改过的图片上产生的 proposals 。因为PASCAL VOC 没有合适的图像，另一个数据库[31]只有54张图和非常少的目标，所以选择将合成转换用于 PASCAL 图像。
+repeatability 就是在相似图像内容上产生 proposals 的性质。直觉上，不同图片上应该产生相似内容的 proposals 。设计实验，比较 proposals 和在修改过的图片上产生的 proposals 。因为PASCAL VOC 没有合适的图像，另一个数据库[31]只有54张图和非常少的目标，所以选择将 **合成转换** 用于 PASCAL 图像。
+
+**3.1 repeatability 的衡量规则**
+
+依据来自[31]，评估兴趣点的 repeatability。PASCAL VOC 2007的测试集加干扰：模糊、旋转、缩放、亮度、JPEG 压缩和椒盐噪声（见图3-图4）。
+
+每一对参考图和干扰图中用给定方法产生1000个窗口。将干扰图的 proposals 投影回参考图，再与参考图的 proposals 匹配（实现时，如果 proposals 旋转后中心超出了图像范围，剔除这样的 proposals ，不用于匹配）。用 IoU (intersection over union 并中交) 作为标准，用贪心法两两匹配（提高匹配效率）。对给定的匹配结果，做图表示取每种 IoU 阈值时的 recall，并定义 repeatability 为 “recall 对比 IoU 阈值”曲线（IoU 在0和1之间）的面积，类似于参考图的 proposals 的平均最好重叠（ABO，见附录A）。那些能得到相似位置、高 IoU，也就是相似图像内容的窗口的方法更有可重复性，因此曲线之下的面积更大。
+
+这样的 proposal 匹配有个问题，大的窗口比小的窗口更易被匹配（同样的干扰对小窗影响更大）。需要考虑这个重要的影响，因为不同的方法有不同的 proposal 窗口大小分布，如图5a 所示。为减轻这个现象的影响，将窗口根据其面积的大小分为10组，分别计算每个窗大小下的recall versus IoU 曲线的面积。图5b 展示了这10组在轻微模糊干扰的效果。大的 proposals 有更高的 repeatability 。在所有图5 的实验中，展示都是10组大小平均后的值。
+
+省略最慢的 CPMC 和 Endres （每个干扰在整个 PASCAL 上要跑约50次）。
+
+![1544878922801]({{site.url}}/static/img/posts/1544878922801.png)
