@@ -1,6 +1,6 @@
 ---
 layout: post
-title: What makes for effective detection proposals?
+title: PAMI2015 What makes for effective detection proposals?
 date:   2018-12-11 16:12:00 +0800
 categories: [proposals]
 ---
@@ -18,7 +18,7 @@ categories: [proposals]
 **关键词**：Computer Vision, objection detection, detection proposals.
 
 [Github](https://github.com/hosang/detection-proposals)
-[Offical Page](multimodal-computing/research/object-recognition-and-scene-understanding/how-good-are-detection-proposals-really/)
+[Offical Page](https://www.mpi-inf.mpg.de/departments/computer-vision-and-multimodal-computing/research/object-recognition-and-scene-understanding/how-good-are-detection-proposals-really/)
 
 ![Figure 1 AR on the PASCAL VOC 2007 test set]({{ site.url }}/static/img/posts/csm_AR_pascal_17ce0d1c62.png "Figure 1 AR on the PASCAL VOC 2007 test set")
 
