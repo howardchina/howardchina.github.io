@@ -21,7 +21,7 @@ Methods: **4 convolutional layers, 2 fully connected layers, 5-fold cross-valida
 
 Results: **accuracy 0.85**
 
-
+---
 
 ## Predicting brain age with deep learning from raw imaging data results in a reliable and heritable biomarker
 predict chronological age in healthy people. deviations from healthy brain aging have been associated with cognitive impairment and disease. CNN applied to both pre-processed and raw T1-weighted MRI data.
@@ -34,18 +34,16 @@ heritability (遗传) of brain-predicted age using 62 female twins.
 
 年龄预测与这次调研无关，略。
 
+---
+
 ## Towards Alzheimer's Disease Classification through Transfer Learning
 
 Marcia Hon, Naimul Mefraz Khan
 Ryerson University, Toronto
 
----
-
 **method**: **transfer learning**, where architecture such as **VGG** and **Inception** are initialized with **pre-trained** weights. fully-connected layer is re-trained with MRI images. **informative slices selection** based on **image entropy**. **OASIS** MRI **dataset**.
 
 **pros**: training size is 10 times smaller than the state-of-the-art. comparable or better performance achieved.
-
----
 
 **1.introduction**
 
