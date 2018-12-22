@@ -188,6 +188,6 @@ related works using deep learning:
 
 第二步：提取各个区域的时序；
 
-第三步：用Pearson 相关系数衡量区域两两之间的FC（Friston 1993）；
+第三步：用Pearson 相关系数衡量区域两两之间的**FC（Friston 1993）**；
 
 最终，每个受试者有4005 (90x89/2)个FC特征。
