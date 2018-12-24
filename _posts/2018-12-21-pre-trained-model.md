@@ -5,7 +5,7 @@ date:   2018-12-21 22:23:00 +0800
 categories: [model]
 ---
 
-## 较新和较早的网络
+## 较新和较早的网络 latest and previous network
 
 参照：[Github:pretrained-models](https://github.com/Cadene/pretrained-models.pytorch) 
 
