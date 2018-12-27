@@ -21,6 +21,7 @@ University of North Carolina at Chapel Hill
 ### Overall Goal
 
 - Baby Connectome Project (BCP): Autism? [6 M, 3~4 Y]
+  - UNC, UM
 - Alzheimer's Disease Neuroimaging Initiative (ADNI): Alzheimer's Disease (AD) [70 Y (MCI) , 75 Y]
 
 ### NIH Lifespan Human Connectome Projects
@@ -40,6 +41,8 @@ University of North Carolina at Chapel Hill
   * architecture: UNet, Dense Block
 
   * output: CSF, GM, WM
+
+    ![1545914137687]({{site.url}}/static/img/posts/1545914137687.png)
 
     Li Wang et al., HBM 2018; MICCAI 2018
 
@@ -76,4 +79,13 @@ University of North Carolina at Chapel Hill
 * Organ Delineation
 
   * Attention-based Semi-supervised Networks for Prostate Segmentation
-  * 
+
+    D. Nie, Y. Gao, L. Wang, and D. Shen. “ASDNet: Attention based Semi-supervised Deep Networks for Medical Image Segmentation”, MICCAI 2018, Granada, Spain, Sep. 16-20, 2018.
+
+    related work:
+
+    SSAE [1] Guo, et al. "Deformable MR Prostate Segmentation via Deep Feature Learning and Sparse Patch Matching”, TMI 35.4 (2016): 1077-1089.
+
+    DSResNet [2] Yu, et al. "Volumetric ConvNets with Mixed Residual Connections for Automated Prostate Segmentation from 3D MR Images”, AAAI. 2017.
+
+unc idea http://bric.unc.edu/ideagroup
