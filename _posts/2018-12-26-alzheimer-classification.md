@@ -253,3 +253,4 @@ save_bottlebeck_features()
 train_top_model()
 ```
 
+Replace original top layers by new fully connected layers. 
