@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  SPM Anatomical Parcellation
-date:   2019-01-02 15:47:00 +0800
+date:   2019-01-04 15:27:00 +0800
 categories: [brain,tools]
 ---
 
@@ -71,12 +71,113 @@ MRI brain template from Montreal Neurological Institue database.
 * software (Voxeline, Diallo, 1998)
 * 3D tracking and drawing of anatomical landmarks both on the external surface of the hemisphere and on any incidence.
 
-*Regions Drawing*
+***Regions Drawing***
 
-
+* draw manually every 2 mm on axial slices (Fig. 3 and 4).
+* sulci landmarks were used as the limits of the ROI on the outer surface of the brain.
+* inner boundaries were traced along the sulci internal course, starting from the landmark.
 
 ![1546413558671]({{site.url}}/static/img/posts/1546413558671.png)
 
 ![1546413670001]({{site.url}}/static/img/posts/1546413670001.png)
 
+*3D Anatomical Volumes of Interest (AVOI)*
+
+* each region was two dimensionally filled using 4邻域联通
+* each anatomical regiona 3D AVOI was created
+* the 1-mm<sup>3</sup> volume was calculated using the nearest neighbor interpolation
+* Each AVOI was then given a gray-level code
+
+*Automated Anatomical Labeling*
+
+three procedures for automatic anatomical labeling of the functional activation map:
+
+* local maxima labeling
+* extended local maxima labeling
+* cluster labeling
+
+preparation: spatially normalized using MNI template
+
+1. functional map is thresholded
+2. both the local maxima and the clusters are extracted
+
+illustrated in Fig. 5.
+
 ![1546413958522]({{site.url}}/static/img/posts/1546413958522.png)
+
+*SPM Anatomical Labeling Interface*
+
+**MNI SINGLE-SUBJECT BRAIN PARCELLATION**
+
+**Sulci Identification**
+
+![1546586246315]({{site.url}}/static/img/posts/1546586246315.png)
+
+*Lateral Surface of the Hemispheres*
+
+* the central region
+* the frontal lobe
+* the temporal lobe
+* the parietal lobe and occipital lobe
+
+*Internal Surface of the Hemispheres*
+
+* Frontal lobe
+* Occipital lobe
+
+*Inferior Surface of the Hemisphere*
+
+* Frontal lobe
+* Temporal lobe
+
+**Regions Definition**
+
+*Central Region*
+
+* Precentral gyrus and postcentral gyrus
+* Rolandic operculum
+
+*Frontal Lobe Lateral Cortex*
+
+* The superior, middle, and inferior frontal gyri.
+* The medial surface of the frontal lobe
+* The orbital part of the frontal lobe
+
+*Temporal Lobe*
+
+* Planimetry
+* Lateral cortex
+
+Parietal Lobe
+
+* Lateral surface
+* Medial surface
+
+Occipital Lobe
+
+* Lateral surface
+* Medial surface
+
+The Limbic Lobe
+
+* The cingulate regions
+* The temporal pole
+* The hippocampal and parahippocampal regions
+
+*The Insula and Subcortical Gray Nuclei*
+
+**Application to Functional Activation Labeling**
+
+![1546586215513]({{site.url}}/static/img/posts/1546586215513.png)
+
+**DISSCUSSION**
+
+*Anatomical Issures*
+
+* MNI single-subject brain
+* AVOI definition
+* Comparison with other parcellations
+
+*Labelling of Functinal Areas*
+
+* SPM interface
