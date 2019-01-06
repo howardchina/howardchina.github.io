@@ -7,7 +7,13 @@ categories: [brain]
 
 ## Automatic Brain Labeling via Multi-Atlas Guided Fully Convolutional Networks
 
-**MA-FCN**
+The labels of target image are what we want. The atlas provides necessary informations of labels as references. 
+
+During training, the K most similar patches for a training patch are selected and input into this deep training model, so model can learn the relevant features and it is like data augmentation.
+
+During testing, we did the same thing without the loss function.
+
+**MA-FCN** 
 
 Keywords: Brain image labeling, multi-atlas, fully convolutional network, patch-based labeling
 
@@ -122,3 +128,99 @@ testing
 1. each testing 3D patch is concatented with its K most similar atlas patches, and the fed into MA-FCN to predict the patch
 2. merge all the overlapping 3D patches by majority voting
 
+***3.1 Data Preparation***
+
+1. affine register all atlases to training data using FLIRT in FSL toolkit.
+   * intensity images
+   * and their corresponding label maps
+2. patch sampling and selection strategy as shown in Figure 2
+
+![1546754831689]({{site.url}}/static/img/posts/1546754831689.png)
+
+***3.1.1 Training patch sampling***
+
+boundary-focused patch extraction
+
+* boundary patches : inside patches = 4:1
+
+***3.1.2 Candidate atlas patch selection***
+
+X: intensity image, Y: label map
+
+1. normalization
+2. select 3D candidates by 2-voxel stride step
+3. select K 3D patches by one-voxel stride step from candidates
+
+***3.2 Multi-atlas Guided Fully Convolutional Networks (MA-FCN)***
+
+![1546758494158]({{site.url}}/static/img/posts/1546758494158.png)
+
+***3.2.1 Atlas-unique pathway***
+
+convert intensity and label into features
+
+concatenate the atlas image and the target image together directly (Fang, Zhang et al. 2017)
+
+* learn the mapping from intensity image to the label map
+  * **Question: can this mapping be formulated in a connective way?**
+
+in this study
+
+* patch-wise 'atlas and target', an atlas-unique pathway
+
+***3.2.2 Target-patch pathway***
+
+U-Net
+
+***3.2.3 Atlas-aware fusion pathway***
+
+The feature maps in each level are concatenated together following several convolutions. Then a convolution layer with 1x1x1 kernel is used to fuse them together.
+
+3.2.4 Loss function
+
+cross-entropy loss
+
+### 4.Experiments and Results
+
+Evaluated the proposed method on
+
+* [the LONI LCPA40 (Shattuck, Mirze et al. 2008) dataset](http://www.loni.ucla.edu/Atlases/LPBA40)
+* [SATA MICCAI 2013 challenge dataset (Bennett Landman 2013)](https://masi.vuse.vanderbilt.edu/workshop2013/index.php/Main_Page)
+
+which the two widely-used datasets for evaluating 2D or 3D labeling algorithms.
+
+The LONI_LPBA40 dataset contains:
+
+* 40 T1-weighted MR brain images
+* with 54 manually labeled ROIs
+* which mostly are distributed within cortical regions
+* Here, the images and labels are used in this experiments
+
+The SATA dataset has:
+
+* 35 subjects with both intensity image and label map
+* are provided with 14 manually labeled ROIs
+* which are inner regions of the brain, covering accumbens, amygdala... on both hemispheres.
+* both raw images and non-rigidly aligned images are provided by this dataset.
+
+Implementation of this model
+
+* CAFFE
+* kernel weights initialize by Xavier function
+* SGD for backpropagation
+  * start learning rate = 0.01
+  * inverse learning policy
+    * gamma = 0.0001
+    * momentum = 0.9
+    * weight decay = 0.00005
+* training batch size is 16 for LONI and 64 for SATA
+
+index
+
+* Dice Similarity Coefficient
+
+$$
+DSC(S_1,S_2)=2\times |S_1\cap S_2|/(|S_1|+|S_2|)
+$$
+
+* Hausdorff Distances
