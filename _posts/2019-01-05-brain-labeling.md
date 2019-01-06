@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Automatic Brain Labeling via Multi-Atlas Guided FCN
-date:   2019-01-05 21:21:00 +0800
+date:   2019-01-06 22:50:00 +0800
 categories: [brain]
 ---
 
@@ -219,8 +219,88 @@ index
 
 * Dice Similarity Coefficient
 
-$$
-DSC(S_1,S_2)=2\times |S_1\cap S_2|/(|S_1|+|S_2|)
-$$
-
 * Hausdorff Distances
+
+![1546778972062]({{site.url}}/static/img/posts/1546778972062.png)
+
+***4.1 Evaluation on LONI LPBA40 dataset***
+
+* 4-fold cross-validation
+
+training
+
+* training patch size 24x24x24
+
+* 8100 patches from each image
+
+* increase the number of data by densely cropping training patches from original MR image
+* selection strategy
+  * 150 from each ROI with
+  * 120 from boundaries
+  * and 30 from the inside of each ROI
+
+testing
+
+* fixed step size of 11 voxels
+* majority voting for labeling overlapping patches
+
+Selecting candidate atlas patches
+
+* size of the search neighborhood = 12 voxels
+
+number of candidate atlas patches is set to K=3
+
+Figure 5 and 6. The labeling result is smoother than the ground truth.
+
+![1546780225096]({{site.url}}/static/img/posts/1546778979999.png)
+
+![1546780289571]({{site.url}}/static/img/posts/1546780289571.png)
+
+***4.2 Evaluation on SATA MICCAI 2013 dataset***
+
+7-fold cross-validation
+
+* 2 folds as atlas images, 
+* 4 folds as training set, 
+* and the remaining one as test set
+
+training
+
+* training patch size = 12x12x12
+* select 4200 patches from each training image.
+* 300 patches are selected from each ROI
+  * 240 around the boundary
+  * 60 inside
+* stride = 5 voxels
+* search neighborhood = 12 voxels
+* K = 3
+
+***4.3 Parameter tuning***
+
+***4.3.1 Patch size***
+
+volumes of representative ROIs
+
+* 12 ROIs from LONI_LPOBA40 dataset
+* 6 ROIs from SATA MICCAI 2013 dataset
+
+![1546784927345]({{site.url}}/static/img/posts/1546784927345.png)
+
+![1546785002962]({{site.url}}/static/img/posts/1546785002962.png)
+
+***4.3.2 The number of atlas-unique pathways***
+
+![1546785920080]({{site.url}}/static/img/posts/1546785920080.png)
+
+***4.4 Comparison with state-of-the-art methods***
+
+The comparison methods include
+
+1. HSPBL (Wu, Kim et al. 2015)
+2. JLF (Wang, Suh et al. 2013) (antsJointFusion command in ANTs toolbox)
+
+baseline: U-Net (target path), FCN (atlas path)
+
+![1546786124735]({{site.url}}/static/img/posts/1546786124735.png)
+
+![1546786159672]({{site.url}}/static/img/posts/1546786159672.png)
