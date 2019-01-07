@@ -2,7 +2,7 @@
 layout: post
 title:  2019年书单
 date:   2019-01-06 11:42:00 +0800
-categories: [brain]
+categories: 
 ---
 
 ref: https://www.zhihu.com/question/275351176/answer/511958518
