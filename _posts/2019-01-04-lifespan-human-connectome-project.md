@@ -86,7 +86,7 @@ Continuity across the lifespan is provided by:
   * spans ages 36-100 + years (Bookheimer et al., under review)
   * and the "Baby Connectome" project spans ages 0-5 years using methods customized for very young children (https://www.med.unc.edu/bric/ideagroup/)
 
-Synergy with other larger-scale iamging srudies on developmental populations:
+Synergy with other larger-scale imaging studies on developmental populations:
 
 * the Philadelphia Neurodevelopmental Cohort (Satterthwaite et al., 2014a; age 8-21 years),
 * the Pediatric Imaging, Neurocognition, and Genetics study (Brown et al., 2012; age 3-20 years),
