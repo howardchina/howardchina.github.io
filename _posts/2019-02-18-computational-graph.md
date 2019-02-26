@@ -74,4 +74,3 @@ Loss Function of **Feedforward**
 4. To calculate **&delta;z<sup>2</sup>/&delta;W<sup>2</sup>**, a tensor with 3 dimensions. Considering W<sup>2</sup> as a **mxn** vector.
 
    ![1550923551221]({{site.url}}/static/img/posts/1550923551221.png)
-
