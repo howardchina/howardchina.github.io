@@ -71,9 +71,9 @@ vector **W** multiply by vector **(x<sup>t</sup> h<sup>t-1</sup> c<sup>t-1</sup>
 1. input gate decide to drop input z or not.
 2. forget gate decide to drop old c<sup>t-1 </sup>or not.
 3. output gate decide to drop new c<sup>t</sup> from output or not
-4. c<sup>t</sup> is updated by c<sup>t-1</sup> and z<sup>f</sup>, the old long memory, and z and z<sup>i</sup>, the current input.
-5. h<sup>t</sup>, the short memory, is updated by c<sup>t</sup>, the new long memory, and the output gate.
-6. y<sup>t</sup>, the current output, is an activation function consisting of *W'* and *h<sup>t</sup>* as parameters.
+4. c<sup>t</sup> is updated by c<sup>t-1</sup> (the old long memory), z<sup>f</sup>, z (the current input) and z<sup>i</sup> and even does not have a non-linear function in this step.
+5. h<sup>t</sup> (the short memory) is updated by c<sup>t</sup> (the new long memory), the activation function and the output gate.
+6. y<sup>t</sup> (the current output) is an activation function consisting of *W'* and *h<sup>t </sup>*(as parameters).
 
 ---
 
