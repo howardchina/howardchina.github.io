@@ -77,3 +77,22 @@ vector **W** multiply by vector **(x<sup>t</sup> h<sup>t-1</sup> c<sup>t-1</sup>
 
 ---
 
+### Dynamic Conditional Generation
+
+1. Encoder
+   * to encode Chinese into Machine Language;
+   * save these Machine Language in a "hidden database".
+2. Decoder
+   * to search and extract specific information in a form of c<sup>i</sup> from "hidden database";
+   * transform such information c<sup>i</sup> into English.
+
+---
+
+### Attention-based model
+
+key: z<sup>0</sup>
+
+* match the key (z<sup>0</sup>) with each h<sup>i</sup>, output inner product;
+* match might be a small NN whose input is h and z, output a scalar;
+* 
+
