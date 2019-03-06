@@ -5,9 +5,22 @@ date:   2019-02-26 00:00:00 +0800
 categories: [GAN]
 ---
 
+Outline
+
+* RNN with Gated Mechanism
+* Sequence Generation
+* Conditional Sequence Generation
+* Tips for Generation
+
+---
+
+## RNN with Gated Mechanism
+
 **Recurrent Neural Network**
 
 ​	Given function f: *h', y=f(h,x)*
+
+* note: **h**: last hidden input, **h'**: current hidden output, **x**: input, **y**: output
 
 ​	No matter how long the input/output sequence is, we only need one function f.
 
@@ -94,5 +107,5 @@ key: z<sup>0</sup>
 
 * match the key (z<sup>0</sup>) with each h<sup>i</sup>, output inner product;
 * match might be a small NN whose input is h and z, output a scalar;
-* 
+
 
