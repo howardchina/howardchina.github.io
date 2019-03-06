@@ -78,6 +78,18 @@ Given function f: *h', y = f(h, x)*
 
 ---
 
+* **Non-linear transform and activation function** represented by **thick arrow**;
+
+​	![1551419813143]({{site.url}}/static/img/posts/1551419813143.png)
+
+* different colors represent different transforms;
+
+* thin arrow represent the ordinary linear data flow;
+
+* dash arrow represents a duplicate.
+
+  
+
 ​	![1551161085709]({{site.url}}/static/img/posts/1551161085709.png)
 
 vector **W** multiply by vector **(x<sup>t</sup> h<sup>t-1</sup> c<sup>t-1</sup>)** , in which **c<sup>t-1</sup>** multiply by a diagonal matrix.
@@ -89,7 +101,18 @@ vector **W** multiply by vector **(x<sup>t</sup> h<sup>t-1</sup> c<sup>t-1</sup>
 3. output gate decide to drop new c<sup>t</sup> from output or not
 4. c<sup>t</sup> is updated by c<sup>t-1</sup> (the old long memory), z<sup>f</sup>, z (the current input) and z<sup>i</sup> and even does not have a non-linear function in this step.
 5. h<sup>t</sup> (the short memory) is updated by c<sup>t</sup> (the new long memory), the activation function and the output gate.
-6. y<sup>t</sup> (the current output) is an activation function consisting of *W'* and *h<sup>t </sup>*(as parameters).
+6. y<sup>t</sup> (the current output) is the result of an activation function consisting of *W'* and *h<sup>t </sup>*(as parameters).
+
+---
+
+Sequence Generation
+
+![1551429195709]({{site.url}}/static/img/posts/1551429195709.png)
+
+1. y<sup>1</sup>, y<sup>2</sup> and y<sup>3</sup> are conditional probability;
+2. started by **BOS** (Begin Of Sentence);
+3. ended with **EOS** (End Of Sentence);
+4. sample rather than argmax so as to generate different sentence.
 
 ---
 
@@ -111,4 +134,24 @@ key: z<sup>0</sup>
 * match the key (z<sup>0</sup>) with each h<sup>i</sup>, output inner product;
 * match might be a small NN whose input is h and z, output a scalar;
 
+
+=======
+Training
+
+1. Minimize **cross-entropy** between each y<sup>t</sup> and training data;
+2. Started with **BOS**;
+
+![1551446739714]({{site.url}}/static/img/posts/1551446739714.png)
+
+---
+
+To consider image as sentence. But the relevance between adjacent pixels are not consisted with intuition.
+
+![1551448266510]({{site.url}}/static/img/posts/1551448266510.png)
+
+---
+
+Pixel-RNN generate each pixel 
+
+![1551450585640]({{site.url}}/static/img/posts/1551450585640.png)
 
