@@ -18,43 +18,46 @@ Outline
 
 **Recurrent Neural Network**
 
-​	Given function f: *h', y=f(h,x)*
+Given function f: *h', y=f(h,x)*
 
 * note: **h**: last hidden input, **h'**: current hidden output, **x**: input, **y**: output
 
-​	No matter how long the input/output sequence is, we only need one function f.
+* No matter how long the input/output sequence is, we only need one function f.
 
-  ![1551157215565]({{site.url}}/static/img/posts/1551157215565.png)
-
----
+* ![1551157215565]({{site.url}}/static/img/posts/1551157215565.png)
 
 **Deep RNN**
 
-​	*h', y = f<sub>1</sub>(h, x)  b', c = f<sub>2</sub>(b, y) ...*
+*h', y = f<sub>1</sub>(h, x)  b', c = f<sub>2</sub>(b, y) ...*
 
-​	![1551157250482]({{site.url}}/static/img/posts/1551157250482.png)
+* Concatenate several RNNs' input and output.
 
----
+* ![1551157250482]({{site.url}}/static/img/posts/1551157250482.png)
 
 **Bidirectional RNN**
 
-​	*h', a = f<sub>1</sub>(h, x)  b', c = f<sub>2</sub>(b, x) y = f<sub>3</sub>(a, c)*
+*h', a = f<sub>1</sub>(h, x)  b', c = f<sub>2</sub>(b, x) y = f<sub>3</sub>(a, c)*
 
-​	![1551158909175]({{site.url}}/static/img/posts/1551158909175.png)
+* input x from time 0 to time n-1
+* input x from tome n-1 to time 0
+* output y sequencially
 
----
+* ![1551158909175]({{site.url}}/static/img/posts/1551158909175.png)
 
 **Naive RNN**
 
-​	Given function f: *h', y = f(h, x)*
+Given function f: *h', y = f(h, x)*
 
-​	![1551159147019]({{site.url}}/static/img/posts/1551159147019.png)
+* ![1551159147019]({{site.url}}/static/img/posts/1551159147019.png)
+* W is a matrix
+* h is a vector
+* h has the same dimension with h'
+* h' is transformed from h and x
+* y is transformed from h'
 
-​	notice: superscript h at W<sup>h</sup> means this parameter W correspond to hidden layer h. So does W<sup>i</sup> and W<sup>o</sup> to input layer and output layer.
+* notice: superscript h at W<sup>h</sup> means this parameter W correspond to hidden layer h. So does W<sup>i</sup> and W<sup>o</sup> to input layer and output layer.
 
-​	ps: sigmoid is better perform than ReLU in RNN.
-
----
+* ps: sigmoid is better performed than ReLU in RNN.
 
 **LSTM**
 
