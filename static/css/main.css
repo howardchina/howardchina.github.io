@@ -6,11 +6,11 @@ body {
   font-size: 16px;
   color: #666;
 }
-body { 
+/*body { 
     zoom: 1.25; 
     -moz-transform: scale(1.25); 
     -moz-transform-origin: 0 0;
-} 
+}*/ 
 hr {
   margin-top: 20px;
   margin-bottom: 20px;

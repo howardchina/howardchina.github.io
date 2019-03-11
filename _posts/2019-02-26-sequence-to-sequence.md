@@ -39,7 +39,7 @@ Given function f: *h', y=f(h,x)*
 *h', a = f<sub>1</sub>(h, x)  b', c = f<sub>2</sub>(b, x) y = f<sub>3</sub>(a, c)*
 
 * input x from time 0 to time n-1
-* input x from tome n-1 to time 0
+* input x from time n-1 to time 0
 * output y sequencially
 
 * ![1551158909175]({{site.url}}/static/img/posts/1551158909175.png)
@@ -48,64 +48,46 @@ Given function f: *h', y=f(h,x)*
 
 Given function f: *h', y = f(h, x)*
 
-* ![1551159147019]({{site.url}}/static/img/posts/1551159147019.png)
 * W is a matrix
 * h is a vector
 * h has the same dimension with h'
 * h' is transformed from h and x
 * y is transformed from h'
-
 * notice: superscript h at W<sup>h</sup> means this parameter W correspond to hidden layer h. So does W<sup>i</sup> and W<sup>o</sup> to input layer and output layer.
-
 * ps: sigmoid is better performed than ReLU in RNN.
+* ![1551159147019]({{site.url}}/static/img/posts/1551159147019.png)
 
 **LSTM**
 
-​	![1551159566140]({{site.url}}/static/img/posts/1551159566140.png)
-
-​	h changes fast -> h<sup>t-1</sup> and h<sup>t</sup> can be very different
-
-​	c changes slow -> c<sup>t-1</sup> and c<sup>t</sup> can be very similar 
-
----
-
-​	![1551159974080]({{site.url}}/static/img/posts/1551159974080.png)
-
-1. z
-2. Input gate z<sup>i</sup>
-3. forget gate z<sup>f</sup>
-4. output gate z<sup>o</sup>
-
----
-
-* **Non-linear transform and activation function** represented by **thick arrow**;
-
-​	![1551419813143]({{site.url}}/static/img/posts/1551419813143.png)
-
-* different colors represent different transforms;
-
+* short time memory: h changes fast -> h<sup>t-1</sup> and h<sup>t</sup> can be very different;
+* long time memory: c changes slow -> c<sup>t-1</sup> and c<sup>t</sup> can be very similar.
+* ![1551159566140]({{site.url}}/static/img/posts/1551159566140.png)
+* z
+* Input gate z<sup>i</sup>
+* forget gate z<sup>f</sup>
+* output gate z<sup>o</sup>
+* ![1551924581619]({{site.url}}/static/img/posts/1551924581619.png)
+* **Non-linear transform and activation function** is represented by **thick arrow**;
+* ![1551419813143]({{site.url}}/static/img/posts/1551419813143.png)
+* **different colors** represent **different transforms**;
 * thin arrow represent the ordinary linear data flow;
+* dash arrow represents a duplicate;
+* a **"peephole"** helps input c<sup>t-1</sup> and **multiply c<sup>t-1</sup> by a diagonal matrix**.
+* multiply vector **W** by vector **(x<sup>t</sup> h<sup>t-1</sup> c<sup>t-1</sup>)** , in which **c<sup>t-1</sup>** is multiplied by a diagonal matrix.
+* ![1551161085709]({{site.url}}/static/img/posts/1551161085709.png)
+* about dimension:
+  * c, h, x and z are of the same dimension;
+  * dot product and matrix addition wouldn't change dimension.
+  * matrix product transform [c, h, x] into z (which is of the same dimension to c, h and x).
+* [z<sup>i</sup> * z ] input gate;
+* [z<sup>f</sup> * c] forget gate;
+* [z<sup>o</sup> * c'] output gate;
+* the long memory, c', is updated by c and input, h and x, and obtained by 2 gate controllers, the forget gate and input gate;
+* the short memory, h', is updated by c';
+* output y' is transformed by an activation function input *W'* and *h'*.
+* ![1551160946442]({{site.url}}/static/img/posts/1551160946442.png)
 
-* dash arrow represents a duplicate.
-
-  
-
-​	![1551161085709]({{site.url}}/static/img/posts/1551161085709.png)
-
-vector **W** multiply by vector **(x<sup>t</sup> h<sup>t-1</sup> c<sup>t-1</sup>)** , in which **c<sup>t-1</sup>** multiply by a diagonal matrix.
-
-​	![1551160946442]({{site.url}}/static/img/posts/1551160946442.png)
-
-1. input gate decide to drop input z or not.
-2. forget gate decide to drop old c<sup>t-1 </sup>or not.
-3. output gate decide to drop new c<sup>t</sup> from output or not
-4. c<sup>t</sup> is updated by c<sup>t-1</sup> (the old long memory), z<sup>f</sup>, z (the current input) and z<sup>i</sup> and even does not have a non-linear function in this step.
-5. h<sup>t</sup> (the short memory) is updated by c<sup>t</sup> (the new long memory), the activation function and the output gate.
-6. y<sup>t</sup> (the current output) is the result of an activation function consisting of *W'* and *h<sup>t </sup>*(as parameters).
-
----
-
-Sequence Generation
+ **Sequence Generation**
 
 ![1551429195709]({{site.url}}/static/img/posts/1551429195709.png)
 
