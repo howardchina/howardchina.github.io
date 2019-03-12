@@ -67,16 +67,16 @@ permalink: /cv/
 			Developed some game demos with cocos, flash, unity(<a href="#GamDevInt">read more</a>).
 		</li>
 	</ol>
-	<h2>AWARDS</h2>
+	<h2>Awards</h2>
 	<ol>
-		<li> 2015-2018: <strong> First Prize of Graduate Studies Scholarship</strong>, Central South University</li>
-		<li> October 2015: <strong> Gold Medal of the ACM-ICPC Asia Changchun Regional Contest</strong>, 15th place, Association for Computing Machinery</li>
-		<li> October 2015: <strong>Bronze Medal of the ACM-ICPC Asia Shenyang Regional Contest</strong>, Association for Computing Machinery</li>
-		<li> December 2015: <strong>Bronze Medal of the ACM-ICPC EC-FINAL Contest</strong>, Association for Computing Machinery</li>
-		<li> October 2014: <strong>Bronze Medal of the ACM-ICPC Asia Shanghai Regional Contest</strong>, Association for Computing Machinery</li>
-			<li> November 2014: <strong>Silver Medal of the ACM-ICPC Asia Guangzhou Regional Contest</strong>, 28th place, Association for Computing Machinery</li>
-		<li> 2014: <strong>First Prize of the Hunan Collegiate Programming Contest</strong>, 7th place, Education Department of Hunan Province.</li>
-		<li> 2012~2013: <strong>National Academic Scholarship</strong>, Central South University</li>
+		<li> 2015-2018: <strong> First Prize of Graduate Studies Scholarship</strong>, Central South University;</li>
+		<li> October 2015: <strong> Gold Medal of the ACM-ICPC Asia Changchun Regional Contest</strong>, 15th place, Association for Computing Machinery;</li>
+		<li> October 2015: <strong>Bronze Medal of the ACM-ICPC Asia Shenyang Regional Contest</strong>, Association for Computing Machinery;</li>
+		<li> December 2015: <strong>Bronze Medal of the ACM-ICPC EC-FINAL Contest</strong>, Association for Computing Machinery;</li>
+		<li> October 2014: <strong>Bronze Medal of the ACM-ICPC Asia Shanghai Regional Contest</strong>, Association for Computing Machinery;</li>
+			<li> November 2014: <strong>Silver Medal of the ACM-ICPC Asia Guangzhou Regional Contest</strong>, 28th place, Association for Computing Machinery;</li>
+		<li> 2014: <strong>First Prize of the Hunan Collegiate Programming Contest</strong>, 7th place, Education Department of Hunan Province;</li>
+		<li> 2012~2013: <strong>National Academic Scholarship</strong>, Central South University.</li>
 	</ol>
 	<h2>Language</h2>
 	<ul>
