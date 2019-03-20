@@ -269,5 +269,29 @@ Given function f: *h', y = f(h, x)*
 
 **Mismatch between Train and Test**
 
-* Exposure Bias
-* 
+* Exposure Bias is the difference between the data flow of training and testing;
+* C is the sum of cross-entropy of each component;
+* during **training**, no matter what have been predicted on the last time, only the pre-designed data should be input to the decoder on this time;
+* ![1552451094748]({{site.url}}/static/img/posts/1552451094748.png)
+* during **testing**, data flow is continuous during the whole pipeline.
+* ![1552451125661]({{site.url}}/static/img/posts/1552451125661.png)
+
+---
+
+**the difference between training error and testing error**
+
+* during training, the mismatched place would not affect the following steps;
+* during testing, the mismatched place could affect the following step;
+* ![1552467587461]({{site.url}}/static/img/posts/1552467587461.png)
+
+* **Problem:** if training is matched to testing, it is hard to train in practice.
+* ![1552467833091]({{site.url}}/static/img/posts/1552467833091.png)
+* **Solution 1:** Scheduled Sampling;
+* sampling from model or reference in a **certain** ratio.
+* ![1552467892944]({{site.url}}/static/img/posts/1552467892944.png)
+* **Solution 2:** Beam Search;
+* Keep several ( = Beam size) best path at each step during testing;
+* ![1552468287338]({{site.url}}/static/img/posts/1552468287338.png)
+
+---
+
