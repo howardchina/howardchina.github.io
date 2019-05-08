@@ -7,4 +7,4 @@ I'm PhD student at [Tianjin University](http://www.tju.edu.cn/english/ "Tianjin 
 
 In 2015, I also took part in ACM-ICPC competition under [Zailiang Chen](http://computer.csu.xk.hnlat.com/index.php?m=currency&c=scholar&a=show&catid=414&id=343744 "陈再良") and won the gold medal in Asia Regional Contest.
 
-Feel free to contact my at [howard_work@qq.com](mailto:howard_work@qq.com "howard_work at qq dot com") or [howardchina12@gmail.com](mailto:howardchina12@gmail.com "howardchina12 at gmail dot com").
+Feel free to contact my at [howard@tju.edu.cn](mailto:howard@tju.edu.cn "howard at tju dot edu dot cn").
