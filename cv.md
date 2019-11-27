@@ -10,7 +10,7 @@ permalink: /cv/
 		<strong>Key Laboratory of Mechanism Theory and Equipment Design (Tianjin University), Ministry of Education</strong><br>
 		135#, Yaguan Road, Jinnan District<br>
 		Tianjin, China, 300350<br>
-		<span class="obfuscate">heqi_work at qq dot com / howardchina12 at gmail dot com</span>
+		<span class="obfuscate">howard at tju dot edu dot com / heqi_work at qq dot com</span>
 	</address>
     <h2>Research Interests</h2>
 	<ul>
