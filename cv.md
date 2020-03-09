@@ -21,18 +21,27 @@ permalink: /cv/
     <h2>Selected International Conference Publications</h2>
 	<ol>
 		<li>
-			<strong>Qi, He</strong> and Beiji, Zou and Chengzhang, Zhu* and Xiyao, Liu and Hongpu, Fu and Lei, Wang: Multi-Label Classification Scheme Based on Local Regression for Retinal Vessel Segmentation, <em>The 25th IEEE International Conference on Image Processing, ICIP2018</em>, pp. 2765--2769, Athens, Greece, October 7th 2018, <a href="https://ieeexplore.ieee.org/document/8451415">[view]</a> <a href="https://github.com/howardchina/MULTI-LABEL-CLASSIFICATION-SCHEME-BASED-ON-LOCAL-REGRESSION-FOR-RETINAL-VESSEL-SEGMENTATION">[code]</a>
+			<strong>Qi He</strong> and Sophia Bano and Omer F Ahmad and Bo Yang and Xin Chen and Pietro Valdastri and Laurence B Lovat and Danail Stoyanov and Siyang Zuo*: Deep Learning Based Anatomical Site Classification for Upper Gastrointestinal Endoscopy, <em>International Journal of Computer Assisted Radiology and Surgery</em>, Under Review
 		</li>
 		<li>
-			Beiji, Zou and Yundi  Guo and Zailiang, Chen* and <strong>Qi He</strong> and Pingbo Ouyang: BGIDB: A fundus ground truth building tool with automatic DDLS classification for glaucoma research, <em>Journal of Central South University</em>, 25(9), 2058--2068, <a href="https://link.springer.com/article/10.1007/s11771-018-3895-4">[view]</a> <a href="https://github.com/howardchina/BGIDB">[code]</a>
+			<strong>Qi He</strong> and Sophia Bano and Omer F Ahmad and Bo Yang and Xin Chen and Pietro Valdastri and Laurence B Lovat and Danail Stoyanov and Siyang Zuo*: Deep Learning Based Anatomical Site Classification for Upper Gastrointestinal Endoscopy, <em>The 11th International Conference on Information Processing in Computer-Assisted Interventions, IPCAI 2020</em>, Munich, Germany, June 23-24, 2020
 		</li>
 		<li>
-			Yundi, Guo and Beiji, Zou* and Zailiang, Chen and <strong>Qi, He</strong> and Qing, Liu and Rongchang, Zhao: Optic Cup Segmentation Using Large Pixel Patch Based CNN, <em>Proceedings of The Ophthalmic Medical Image Analysis Workshop</em>, DOI: 10.17077/omia.1056, 2016
+			Zou Beiji and Yulan Dai and <strong>Qi He</strong> and Chengzhang Zhu and Geng Liu and Yu Su and Ru Tang: Multi-Label Classification Scheme Based on Local Regression for Retinal Vessel Segmentation, <em>IEEE/ACM Transactions on Computational Biology and Bioinformatics</em> Accepted, TCBB-2019-09-0409
+		</li>
+		<li>
+			<strong>Qi He</strong> and Beiji Zou and Chengzhang Zhu* and Xiyao Liu and Hongpu Fu and Lei Wang: Multi-Label Classification Scheme Based on Local Regression for Retinal Vessel Segmentation, <em>The 25th IEEE International Conference on Image Processing, ICIP2018</em>, pp. 2765--2769, Athens, Greece, October 7th 2018, <a href="https://ieeexplore.ieee.org/document/8451415">[view]</a> <a href="https://github.com/howardchina/MULTI-LABEL-CLASSIFICATION-SCHEME-BASED-ON-LOCAL-REGRESSION-FOR-RETINAL-VESSEL-SEGMENTATION">[code]</a>
+		</li>
+		<li>
+			Beiji Zou and Yundi Guo and Zailiang Chen* and <strong>Qi He</strong> and Pingbo Ouyang: BGIDB: A fundus ground truth building tool with automatic DDLS classification for glaucoma research, <em>Journal of Central South University</em>, 25(9), 2058--2068, <a href="https://link.springer.com/article/10.1007/s11771-018-3895-4">[view]</a> <a href="https://github.com/howardchina/BGIDB">[code]</a>
+		</li>
+		<li>
+			Yundi Guo and Beiji Zou* and Zailiang Chen and <strong>Qi He</strong> and Qing Liu and Rongchang Zhao: Optic Cup Segmentation Using Large Pixel Patch Based CNN, <em>Proceedings of The Ophthalmic Medical Image Analysis Workshop</em>, DOI: 10.17077/omia.1056, 2016
 		</li>
 	</ol>
 	<h2>Selected Patents</h2>
 	<ul> 
-		<li>Beiji, Zou and <strong>Qi He</strong> and Chengzhang, Zhu: A method based on local regression model and deep learning for retinal vessel segmentation, 201810213111.9, 2018 (in Chinese)</li>
+		<li>Beiji Zou and <strong>Qi He</strong> and Chengzhang Zhu: A method based on local regression model and deep learning for retinal vessel segmentation, 201810213111.9, 2018 (in Chinese)</li>
 	</ul>
 	<h2>Education</h2>
 	<ul>
