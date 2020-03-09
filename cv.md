@@ -27,7 +27,7 @@ permalink: /cv/
 			<strong>Qi He</strong> and Sophia Bano and Omer F Ahmad and Bo Yang and Xin Chen and Pietro Valdastri and Laurence B Lovat and Danail Stoyanov and Siyang Zuo*: Deep Learning Based Anatomical Site Classification for Upper Gastrointestinal Endoscopy, <em>The 11th International Conference on Information Processing in Computer-Assisted Interventions, IPCAI 2020</em>, Munich, Germany, June 23-24, 2020
 		</li>
 		<li>
-			Zou Beiji and Yulan Dai and <strong>Qi He</strong> and Chengzhang Zhu and Geng Liu and Yu Su and Ru Tang: Multi-Label Classification Scheme Based on Local Regression for Retinal Vessel Segmentation, <em>IEEE/ACM Transactions on Computational Biology and Bioinformatics</em> Accepted, TCBB-2019-09-0409
+			Zou Beiji and Yulan Dai and <strong>Qi He</strong> and Chengzhang Zhu and Geng Liu and Yu Su and Ru Tang: Multi-Label Classification Scheme Based on Local Regression for Retinal Vessel Segmentation, <em>IEEE/ACM Transactions on Computational Biology and Bioinformatics</em>, TCBB-2019-09-0409
 		</li>
 		<li>
 			<strong>Qi He</strong> and Beiji Zou and Chengzhang Zhu* and Xiyao Liu and Hongpu Fu and Lei Wang: Multi-Label Classification Scheme Based on Local Regression for Retinal Vessel Segmentation, <em>The 25th IEEE International Conference on Image Processing, ICIP2018</em>, pp. 2765--2769, Athens, Greece, October 7th 2018, <a href="https://ieeexplore.ieee.org/document/8451415">[view]</a> <a href="https://github.com/howardchina/MULTI-LABEL-CLASSIFICATION-SCHEME-BASED-ON-LOCAL-REGRESSION-FOR-RETINAL-VESSEL-SEGMENTATION">[code]</a>
