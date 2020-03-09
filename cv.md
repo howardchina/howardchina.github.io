@@ -63,6 +63,12 @@ permalink: /cv/
 	<h2>Work Experience</h2>
 	<ol>
 		<li>
+			<strong> University College London (UCL)</strong>, London, UK<br>    
+			Intern Researcher in <strong>Surgical Robot Vision Research Group</strong><br>
+			July 2019 ~ Oct. 2019<br>
+			Advisors: <a href="mailto:sophia.bano@ucl.ac.uk">Dr. Sophia Bano</a> and <a href="mailto:danail.stoyanov@ucl.ac.uk">Dr. Danail Stoyanov</a>
+		</li>
+		<li>
 			<strong> Institution of Automation, Chinese Academy of Sciences</strong>, Beijing, China<br>    
 			Intern Researcher in <strong>The State Key Laboratory for Management and Control of Complex System</strong><br>
 			Jun. 2018 ~ Nov. 2018<br>
