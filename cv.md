@@ -38,6 +38,9 @@ permalink: /cv/
 		<li>
 			Yundi Guo and Beiji Zou* and Zailiang Chen and <strong>Qi He</strong> and Qing Liu and Rongchang Zhao: Optic Cup Segmentation Using Large Pixel Patch Based CNN, <em>Proceedings of The Ophthalmic Medical Image Analysis Workshop</em>, DOI: 10.17077/omia.1056, 2016
 		</li>
+		<li>
+			Beiji Zou and Yundi Guo and <strong>Qi He</strong> and Pingbo Ouyang and Ke Liu and Zailiang Chen*: 3D Filtering by Block Matching and Convolutional Neural Network for Image Denoising, <em>Journal of Computer Science and Technology</em>, 33(4), 838-848
+		</li>
 	</ol>
 	<h2>Selected Patents</h2>
 	<ul> 
