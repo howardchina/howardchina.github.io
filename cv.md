@@ -16,6 +16,7 @@ permalink: /cv/
 	<ul>
 		<li>Computer aided endoscopy</li>
 		<li>Deep convolutional neural network</li>
+		<li>Computer vision</li>
 		<li>Ophthalmic medical imaging</li>
 	</ul>
     <h2>Selected International Conference Publications</h2>
