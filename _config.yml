@@ -1,5 +1,5 @@
 title: Professional alchemy
-description: Thanks to Yafei
+description: Thanks to Y*f**
 author: Howard He
 github: https://github.com/howardchina
 about: Currently doing more in Computer Vision, focused in Deep CNN and Medical Imaging.
@@ -32,10 +32,10 @@ share:
   fb_appid: 528977307581187
 
 urls:
-    - text: About Me
-      url: /about/
-    - text: Curriculum Vitae
-      url: /cv/
+    # - text: About Me
+      # url: /about/
+    # - text: Curriculum Vitae
+      # url: /cv/
     - text: My Projects
       url: /projects/
     - text: XML Feed
