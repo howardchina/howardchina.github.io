@@ -8,7 +8,7 @@ categories: [detection]
 ## 摘要
 
 
-本文是对[mmderection-retinanet][mmderection-retinanet] 从代码层面上的再解读，便于从代码上改写onestage的目标检测网络。
+本文是对 https://zhuanlan.zhihu.com/p/346198300 ,《轻松掌握 MMDetection 中常用算法(一)：RetinaNet 及配置详解》从代码层面上的再解读，便于从代码上改写onestage的目标检测网络。
 
 其简要网络结构图如下：
 
@@ -358,5 +358,3 @@ neck=dict(
 
 
 
-
-[mmdetection-retinanet]: https://zhuanlan.zhihu.com/p/346198300	"轻松掌握 MMDetection 中常用算法(一)：RetinaNet 及配置详解"
