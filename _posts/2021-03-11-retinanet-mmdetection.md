@@ -209,7 +209,7 @@ return tuple(outs)
       self.stage_blocks = stage_blocks[:num_stages]
 ```
 
- ## neck
+## neck
 
 mmdetection/mmdet/models/necks/fpn.py文件
 
