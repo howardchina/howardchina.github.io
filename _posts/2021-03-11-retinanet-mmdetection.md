@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  RetinaNet source code analysis
-date:   2021-03-12 03:00:00 +0800
+date:   2021-03-14 23:56:00 +0800
 categories: [detection]
 ---
 
@@ -922,22 +922,99 @@ overlaps:tensor([[-1.0000,  0.0323,  0.0000],
 '''
 ```
 
-这里绿框gt，蓝框bbox，红框ignore。依照上方注释内代码输出，ignore_wrt_candidates = True，去掉了第三个bbox；ignore_wrt_candidates = False，去掉了第一个bbox。
+这里绿框gt，蓝框bbox，红框ignore。依照上方注释内代码输出，ignore_wrt_candidates = True，去掉了第三个bbox（注意此处阈值等于0.5却没有忽略第二个bbox）；ignore_wrt_candidates = False，去掉了第一个bbox。
 
 ![2021031142003123456]({{ site.url }}/static/img/posts/2021031142003123456.png "ignore_iof")
 
+mmdetection/mmdet/core/bbox/assigners/max_iou_assigner.py文件（line119）调用assign_wrt_overlaps()方法从overlap m行n列这样的矩阵中读出n个anchors的gt_bbox index和label。
 
+**(1) 初始化所有 anchor 为忽略样本** line140
 
-mmdetection/mmdet/core/bbox/assigners/max_iou_assigner.py文件（line211）的assign方法再次调用了assign_wrt_overlaps()方法，
+假设所有输出特征的所有 anchor 总数一共 n 个，对应某张图片中 gt bbox 个数为 m，首先初始化长度为 n 的 `assigned_gt_inds`，全部赋值为 -1，表示当前全部设置为忽略样本
 
-在层面上，返回一个合适的AssignResult类的实例，将。
+```python
+# 1. assign -1 by default
+assigned_gt_inds = overlaps.new_full((num_bboxes, ),
+                                     -1,
+                                     dtype=torch.long)
+```
+
+**(2) 计算背景样本** line165
+
+max_overlaps是长度为n的数组，表示每个bboxes最大iou的gt。gt_max_overlaps是长度为m的数组，表示每个gt最大ious的bbox。将每个 anchor 和所有 gt bbox 计算 iou，找出最大 iou，如果该 iou 小于 `neg_iou_thr` 或者在背景样本阈值范围内，则该 anchor 对应索引位置的 `assigned_gt_inds` 设置为 0，表示是负样本(背景样本)。
+
+```python
+max_overlaps, argmax_overlaps = overlaps.max(dim=0)
+gt_max_overlaps, gt_argmax_overlaps = overlaps.max(dim=1)
+
+# 2. assign negative: below
+# the negative inds are set to be 0
+if isinstance(self.neg_iou_thr, float):
+    assigned_gt_inds[(max_overlaps >= 0)
+                     & (max_overlaps < self.neg_iou_thr)] = 0
+elif isinstance(self.neg_iou_thr, tuple):
+    assert len(self.neg_iou_thr) == 2
+    # 可以设置一个范围
+    assigned_gt_inds[(max_overlaps >= self.neg_iou_thr[0])
+                     & (max_overlaps < self.neg_iou_thr[1])] = 0
+```
+
+**(3) 用max_overlaps计算高质量正样本** line181
+
+将每个 anchor 和所有 gt bbox 计算 iou，找出最大 iou，如果其最大 iou 大于等于 `pos_iou_thr`，则设置该 anchor 对应所有的 `assigned_gt_inds` 设置为当前匹配 gt bbox 的编号 +1(后面会减掉 1)，表示该 anchor 负责预测该 gt bbox，且是高质量 anchor。之所以要加 1，是为了区分背景样本(背景样本的 `assigned_gt_inds` 值为 0)
+
+```python
+# 3. assign positive: above positive IoU threshold
+pos_inds = max_overlaps >= self.pos_iou_thr
+assigned_gt_inds[pos_inds] = argmax_overlaps[pos_inds] + 1
+```
+
+**(4) 用gt_max_overlaps适当增加更多正样本** line184
+
+在第三步计算高质量正样本中可能会出现某些 gt bbox 没有分配给任何一个 anchor (由于 iou 低于 `pos_iou_thr`)，导致该 gt bbox 不被认为是前景物体，此时可以通过 `self.match_low_quality=True` 配置进行补充正样本。
+
+对于每个 gt bbox 需要找出和其最大 iou 的 anchor 索引，如果其 iou 大于 `min_pos_iou`，则将该 anchor 对应索引的 `assigned_gt_inds` 设置为正样本，表示该 anchor 负责预测对应的 gt bbox。通过本步骤，可以最大程度保证每个 gt bbox 都有相应的 anchor 负责预测，**但是如果其最大 iou 值还是小于 `min_pos_iou`，则依然不被认为是前景物体**。
+
+```python
+if self.match_low_quality:
+    # Low-quality matching will overwirte the assigned_gt_inds assigned
+    # in Step 3. Thus, the assigned gt might not be the best one for
+    # prediction.
+    # For example, if bbox A has 0.9 and 0.8 iou with GT bbox 1 & 2,
+    # bbox 1 will be assigned as the best target for bbox A in step 3.
+    # However, if GT bbox 2's gt_argmax_overlaps = A, bbox A's
+    # assigned_gt_inds will be overwritten to be bbox B.
+    # This might be the reason that it is not used in ROI Heads.
+    for i in range(num_gts):
+        if gt_max_overlaps[i] >= self.min_pos_iou:
+            if self.gt_max_assign_all:
+                #如果有多个相同最高 iou 的 anchor 和该 gt bbox 对应，则一并赋值
+                max_iou_inds = overlaps[i, :] == gt_max_overlaps[i]
+                # 同样需要加1
+                assigned_gt_inds[max_iou_inds] = i + 1
+            else:
+                assigned_gt_inds[gt_argmax_overlaps[i]] = i + 1
+```
+
+从这一步可以看出，3 和 4 有部分 anchor 重复分配了，即当某个 gt bbox 和 anchor 的最大 iou 大于等于 `pos_iou_thr`，那肯定大于 `min_pos_iou`，此时 3 和 4 步骤分配的同一个 anchor，并且从上面注释可以看出本步骤可能会引入低质量 anchor，是否需要开启本步骤需要根据不同算法来确定。
+
+line211返回一个合适的AssignResult类的实例。num_gts是gt数量；assigned_gt_inds是n长度数组，保存前景的gt index、背景、忽略；max_overlaps是每个bboxes IoU最大的gt产生的IoU；assigned_labels表示背景的label（-1）和前景的label（对应分类）。
 
 ```python
         return AssignResult(
             num_gts, assigned_gt_inds, max_overlaps, labels=assigned_labels)
 ```
 
-总结：AnchorHead类初始化assigner实例->AnchorHead类_get_targets_single()方法->MaxIoUAssigner类重载父类BaseAssigner类assign()方法
+总流程：AnchorHead类初始化assigner实例->AnchorHead类_get_targets_single()方法->MaxIoUAssigner类重载父类BaseAssigner类assign()方法
+
+此时可以可以得到如下总结：
+
+- 如果 **anchor** 和所有 gt bbox 的最大 iou 值小于 0.4，那么该 anchor 就是背景样本
+- 如果 **anchor** 和所有 gt bbox 的最大 iou 值大于等于 0.5，那么该 anchor 就是高质量正样本
+- 如果 **gt bbox** 和所有 anchor 的最大 iou 值大于等于 0(可以看出每个 gt bbox 都一定有至少一个 anchor 匹配)，那么该 gt bbox 所对应的 anchor 也是正样本
+- 其余样本全部为忽略样本即 anchor 和所有 gt bbox 的最大 iou 值处于 [0.4,0.5) 区间的 anchor 为忽略样本，不计算 loss
+
+
 
 ## loss
 
@@ -963,25 +1040,6 @@ mmdetection/mmdet/core/bbox/assigners/max_iou_assigner.py文件（line211）的a
                       gt_bboxes_ignore=None,
                       proposal_cfg=None,
                       **kwargs):
-        """
-        Args:
-            x (list[Tensor]): Features from FPN.
-            img_metas (list[dict]): Meta information of each image, e.g.,
-                image size, scaling factor, etc.
-            gt_bboxes (Tensor): Ground truth bboxes of the image,
-                shape (num_gts, 4).
-            gt_labels (Tensor): Ground truth labels of each box,
-                shape (num_gts,).
-            gt_bboxes_ignore (Tensor): Ground truth bboxes to be
-                ignored, shape (num_ignored_gts, 4).
-            proposal_cfg (mmcv.Config): Test / postprocessing configuration,
-                if None, test_cfg would be used
-
-        Returns:
-            tuple:
-                losses: (dict[str, Tensor]): A dictionary of loss components.
-                proposal_list (list[Tensor]): Proposals of each image.
-        """
         outs = self(x)
         if gt_labels is None:
             loss_inputs = outs + (gt_bboxes, img_metas)
@@ -1001,7 +1059,18 @@ mmdetection/mmdet/core/bbox/assigners/max_iou_assigner.py文件（line211）的a
 outs = self(x)
 ```
 
-2.1.1.**forward**函数在mmdetection/mmdet/models/dense_heads/anchor_head.py文件(line122)定义。此处衔接head章节，已经讨论清楚了。总结就是**forward**->**multi_apply**->**forward_single**的流程，目前没有涉及assigner，所以assigner是在**loss**在调用。
+2.1.1.**forward**函数在mmdetection/mmdet/models/dense_heads/anchor_head.py文件(line122)定义。返回分类和bbox的预测结果。
+
+```python
+    def forward(self, feats):
+        return multi_apply(self.forward_single, feats)
+    def forward_single(self, x):
+        cls_score = self.conv_cls(x)
+        bbox_pred = self.conv_reg(x)
+        return cls_score, bbox_pred
+```
+
+此处衔接head章节，已经讨论清楚了。总结就是**forward**->**multi_apply**->**forward_single**的流程，没有涉及assigner，因为assigner是在**loss**在调用。
 
 2.2.调用**loss**()函数(2.2.1)，把上一步forward的结果和gt比对。
 
@@ -1025,10 +1094,11 @@ outs = self(x)
         assert len(featmap_sizes) == self.anchor_generator.num_levels
 
         device = cls_scores[0].device
-        # 获取特征图大小的anchor
+        # 获取全部图片的5个特征图的anchor
         anchor_list, valid_flag_list = self.get_anchors(
             featmap_sizes, img_metas, device=device)
         label_channels = self.cls_out_channels if self.use_sigmoid_cls else 1
+        # 计算出所有anchors的理想分类
         cls_reg_targets = self.get_targets(
             anchor_list,
             valid_flag_list,
@@ -1039,8 +1109,10 @@ outs = self(x)
             label_channels=label_channels)
         if cls_reg_targets is None:
             return None
+        # 拆分返回值，已经按multi levels排好序
         (labels_list, label_weights_list, bbox_targets_list, bbox_weights_list,
          num_total_pos, num_total_neg) = cls_reg_targets
+        # 确定总采样数量是num_total_pos，因为self.sampling=False
         num_total_samples = (
             num_total_pos + num_total_neg if self.sampling else num_total_pos)
 
@@ -1052,7 +1124,7 @@ outs = self(x)
             concat_anchor_list.append(torch.cat(anchor_list[i]))
         all_anchor_list = images_to_levels(concat_anchor_list,
                                            num_level_anchors)
-
+        # 对每个level做一遍loss
         losses_cls, losses_bbox = multi_apply(
             self.loss_single,
             cls_scores,
@@ -1081,22 +1153,10 @@ b.获取featmap中的anchor位置
             featmap_sizes, img_metas, device=device)
 ```
 
-​    b.1. get_anchors()函数定义在mmdetection/mmdet/models/dense_heads/anchor_head.py文件line141，在章节anchor generator中已经讲清楚。
+​    b.1. get_anchors()函数定义在mmdetection/mmdet/models/dense_heads/anchor_head.py文件line141，在章节anchor generator中已经讲清楚。返回的是全部的anchors位置和anchors是否在图片内。
 
 ```python
     def get_anchors(self, featmap_sizes, img_metas, device='cuda'):
-        """Get anchors according to feature map sizes.
-
-        Args:
-            featmap_sizes (list[tuple]): Multi-level feature map sizes.
-            img_metas (list[dict]): Image meta info.
-            device (torch.device | str): Device for returned tensors
-
-        Returns:
-            tuple:
-                anchor_list (list[Tensor]): Anchors of each image.
-                valid_flag_list (list[Tensor]): Valid flags of each image.
-        """
         num_imgs = len(img_metas)
 
         # since feature map sizes of all images are the same, we only compute
@@ -1115,8 +1175,269 @@ b.获取featmap中的anchor位置
         return anchor_list, valid_flag_list
 ```
 
+c. **get_targets()**方法计算出所有anchors的理想分类，通过所有gt_bboxes和anchors的位置，以及gt_label。
 
-2.3.返回losses（和调用get_bboxes得到初步预测结果，onestage的方法如RetinaNet没有这一步）。
+   mmdetection/mmdet/models/dense_heads/anchor_head.py文件(line336)定义get_targets()方法直接调用了_get_targets_single()
+
+```python
+        results = multi_apply(
+            self._get_targets_single,
+            concat_anchor_list,
+            concat_valid_flag_list,
+            gt_bboxes_list,
+            gt_bboxes_ignore_list,
+            gt_labels_list,
+            img_metas,
+            label_channels=label_channels,
+            unmap_outputs=unmap_outputs)
+```
+
+   line210 **_get_targets_single()**方法先提出容忍边界内部的anchors
+
+```python
+        inside_flags = anchor_inside_flags(flat_anchors, valid_flags,
+                                           img_meta['img_shape'][:2],
+                                           self.train_cfg.allowed_border)
+        if not inside_flags.any():
+            return (None, ) * 7
+        # assign gt and sample anchors
+        anchors = flat_anchors[inside_flags, :]
+```
+
+   line218 assigner把这些anchors分为背景、前景、忽略。已经在章节assigner中解释清楚。sampling控制采样。
+
+```python
+        assign_result = self.assigner.assign(
+            anchors, gt_bboxes, gt_bboxes_ignore,
+            None if self.sampling else gt_labels)
+```
+
+   sampling定义（line61）为False，因为这用了FocalLoss。
+
+```python
+        self.sampling = loss_cls['type'] not in [
+            'FocalLoss', 'GHMC', 'QualityFocalLoss'
+        ]
+```
+
+   line78 sampling继续发挥作用初始化了sampler。得到一个PseudoSampler类型的sample
+
+```python
+        if self.train_cfg:
+            self.assigner = build_assigner(self.train_cfg.assigner)
+            # use PseudoSampler when sampling is False
+            if self.sampling and hasattr(self.train_cfg, 'sampler'):
+                sampler_cfg = self.train_cfg.sampler
+            else:
+                sampler_cfg = dict(type='PseudoSampler')
+            self.sampler = build_sampler(sampler_cfg, context=self)
+```
+
+   就是直接用label的值，不额外控制采样。mmdetection/mmdet/core/bbox/samplers/pseudo_sampler.py文件line23
+
+```python
+    def sample(self, assign_result, bboxes, gt_bboxes, **kwargs):
+        """Directly returns the positive and negative indices  of samples.
+
+        Args:
+            assign_result (:obj:`AssignResult`): Assigned results
+            bboxes (torch.Tensor): Bounding boxes
+            gt_bboxes (torch.Tensor): Ground truth boxes
+
+        Returns:
+            :obj:`SamplingResult`: sampler results
+        """
+        pos_inds = torch.nonzero(
+            assign_result.gt_inds > 0, as_tuple=False).squeeze(-1).unique()
+        neg_inds = torch.nonzero(
+            assign_result.gt_inds == 0, as_tuple=False).squeeze(-1).unique()
+        gt_flags = bboxes.new_zeros(bboxes.shape[0], dtype=torch.uint8)
+        sampling_result = SamplingResult(pos_inds, neg_inds, bboxes, gt_bboxes,
+                                         assign_result, gt_flags)
+        return sampling_result
+```
+
+   line 221 初始化一个采样器采样
+
+```python
+        sampling_result = self.sampler.sample(assign_result, anchors,
+                                              gt_bboxes)
+```
+
+   采样器sampling_result做了一些结构化的操作，定义了一些属性便于直接调用
+
+```python
+    def __init__(self, pos_inds, neg_inds, bboxes, gt_bboxes, assign_result,
+                 gt_flags):
+        self.pos_inds = pos_inds
+        self.neg_inds = neg_inds
+        self.pos_bboxes = bboxes[pos_inds]
+        self.neg_bboxes = bboxes[neg_inds]
+        self.pos_is_gt = gt_flags[pos_inds]
+
+        self.num_gts = gt_bboxes.shape[0]
+        self.pos_assigned_gt_inds = assign_result.gt_inds[pos_inds] - 1
+
+        if gt_bboxes.numel() == 0:
+            # hack for index error case
+            assert self.pos_assigned_gt_inds.numel() == 0
+            self.pos_gt_bboxes = torch.empty_like(gt_bboxes).view(-1, 4)
+        else:
+            if len(gt_bboxes.shape) < 2:
+                gt_bboxes = gt_bboxes.view(-1, 4)
+
+            self.pos_gt_bboxes = gt_bboxes[self.pos_assigned_gt_inds, :]
+
+        if assign_result.labels is not None:
+            self.pos_gt_labels = assign_result.labels[pos_inds]
+        else:
+            self.pos_gt_labels = None
+```
+
+   给正样本bbox的loss权重1，label的权重1，负样本label权重1，其余忽略。正样本bbox有target。
+
+```python
+        pos_inds = sampling_result.pos_inds
+        neg_inds = sampling_result.neg_inds
+        if len(pos_inds) > 0:
+            if not self.reg_decoded_bbox:
+                pos_bbox_targets = self.bbox_coder.encode(
+                    sampling_result.pos_bboxes, sampling_result.pos_gt_bboxes)
+            else:
+                pos_bbox_targets = sampling_result.pos_gt_bboxes
+            # 正样本bbox有target
+            bbox_targets[pos_inds, :] = pos_bbox_targets
+            # 正样本bbox的loss权重1
+            bbox_weights[pos_inds, :] = 1.0
+            if gt_labels is None:
+                # Only rpn gives gt_labels as None
+                # Foreground is the first class since v2.5.0
+                labels[pos_inds] = 0
+            else:
+                labels[pos_inds] = gt_labels[
+                    sampling_result.pos_assigned_gt_inds]
+            # pos_weight=-1
+            if self.train_cfg.pos_weight <= 0:
+                # 正样本label的权重1
+                label_weights[pos_inds] = 1.0
+            else:
+                label_weights[pos_inds] = self.train_cfg.pos_weight
+        if len(neg_inds) > 0:
+            # 负样本label权重1
+            label_weights[neg_inds] = 1.0
+```
+
+   unmap回去。原先是从flat_anchors中挑出了inside_flags位置上的anchors赋值，忽略了外面的；现在把label、label_weights、bbox_targets、bbox_weights都复原回到原先位置上。unmap实现在mmdetection/mmdet/core/utils/misc.py文件line57-67。
+
+```python
+        # map up to original set of anchors
+        if unmap_outputs:
+            num_total_anchors = flat_anchors.size(0)
+            labels = unmap(
+                labels, num_total_anchors, inside_flags,
+                fill=self.num_classes)  # fill bg label
+            label_weights = unmap(label_weights, num_total_anchors,
+                                  inside_flags)
+            bbox_targets = unmap(bbox_targets, num_total_anchors, inside_flags)
+            bbox_weights = unmap(bbox_weights, num_total_anchors, inside_flags)
+```
+
+   给labels, label_weights, bbox_targets, bbox_weights这些返回回去，此外还有pos_inds, neg_inds, sampling_result这些虽然冗余但是可能用到的。line267
+
+```python
+        return (labels, label_weights, bbox_targets, bbox_weights, pos_inds,
+                neg_inds, sampling_result)
+```
+
+   回到get_target()接住这么多返回值。
+
+```python
+(all_labels, all_label_weights, all_bbox_targets, all_bbox_weights,
+         pos_inds_list, neg_inds_list, sampling_results_list) = results[:7]
+        rest_results = list(results[7:])  # user-added return values
+```
+
+   把这些值再组装一遍递给loss，mmdetection/mmdet/core/anchor/utils.py文件(line4)实现了images_to_levels()方法，作用是Convert targets by image to targets by feature level; [target_img0, target_img1] -> [target_level0, target_level1, ...].
+
+```python
+        # sampled anchors of all images
+        # 所有图片正anchors个数
+        num_total_pos = sum([max(inds.numel(), 1) for inds in pos_inds_list])
+        # 所有图片负anchors个数
+        num_total_neg = sum([max(inds.numel(), 1) for inds in neg_inds_list])
+        # split targets to a list w.r.t. multiple levels
+        # 按照level再排一遍。
+        # [target_img0, target_img1] -> [target_level0, target_level1, ...]
+        labels_list = images_to_levels(all_labels, num_level_anchors)
+        label_weights_list = images_to_levels(all_label_weights,
+                                              num_level_anchors)
+        bbox_targets_list = images_to_levels(all_bbox_targets,
+                                             num_level_anchors)
+        bbox_weights_list = images_to_levels(all_bbox_weights,
+                                             num_level_anchors)
+        res = (labels_list, label_weights_list, bbox_targets_list,
+               bbox_weights_list, num_total_pos, num_total_neg)
+```
+
+   d. line 463-486 把返回值拆开，因为get_target已经按照multi levels排好了序，所以不用再动。接下来只要对anchor_list调整成multi levels的顺序，然后传入loss_single单独处理每个level的loss。
+
+```python
+        # 拆分返回值，已经按multi levels排好序
+        (labels_list, label_weights_list, bbox_targets_list, bbox_weights_list,
+         num_total_pos, num_total_neg) = cls_reg_targets
+        # 确定总采样数量是num_total_pos，因为self.sampling=False
+        num_total_samples = (
+            num_total_pos + num_total_neg if self.sampling else num_total_pos)
+
+        # anchor number of multi levels
+        num_level_anchors = [anchors.size(0) for anchors in anchor_list[0]]
+        # concat all level anchors and flags to a single tensor
+        concat_anchor_list = []
+        for i in range(len(anchor_list)):
+            concat_anchor_list.append(torch.cat(anchor_list[i]))
+        all_anchor_list = images_to_levels(concat_anchor_list,
+                                           num_level_anchors)
+        # 对每个level做一遍loss
+        losses_cls, losses_bbox = multi_apply(
+            self.loss_single,
+            cls_scores,
+            bbox_preds,
+            all_anchor_list,
+            labels_list,
+            label_weights_list,
+            bbox_targets_list,
+            bbox_weights_list,
+            num_total_samples=num_total_samples)
+```
+
+  line372 loss_single把预测值和target对应的label和bbox分别计算了soft_L1_loss和Focal_loss，然后返回。
+
+```python
+    def loss_single(self, cls_score, bbox_pred, anchors, labels, label_weights,
+                    bbox_targets, bbox_weights, num_total_samples):
+        # classification loss
+        labels = labels.reshape(-1)
+        label_weights = label_weights.reshape(-1)
+        cls_score = cls_score.permute(0, 2, 3,
+                                      1).reshape(-1, self.cls_out_channels)
+        loss_cls = self.loss_cls(
+            cls_score, labels, label_weights, avg_factor=num_total_samples)
+        # regression loss
+        bbox_targets = bbox_targets.reshape(-1, 4)
+        bbox_weights = bbox_weights.reshape(-1, 4)
+        bbox_pred = bbox_pred.permute(0, 2, 3, 1).reshape(-1, 4)
+        if self.reg_decoded_bbox:
+            anchors = anchors.reshape(-1, 4)
+            bbox_pred = self.bbox_coder.decode(anchors, bbox_pred)
+        loss_bbox = self.loss_bbox(
+            bbox_pred,
+            bbox_targets,
+            bbox_weights,
+            avg_factor=num_total_samples)
+        return loss_cls, loss_bbox
+```
+
+2.3.mmdetection/mmdet/models/dense_heads/base_dense_head.py文件（line54）返回losses（和调用get_bboxes得到初步预测结果，onestage的方法如RetinaNet没有这一步）。
 
 ```python
         if proposal_cfg is None:
@@ -1126,3 +1447,128 @@ b.获取featmap中的anchor位置
             return losses, proposal_list
 ```
 
+到此训练部分完全结束。
+
+## 测试
+
+mmdetection/mmdet/models/detectors/single_stage.py文件（line97）**simple_test()**方法，图片经过backbone和neck生成muti levels的预测值，然后过get_bboxes()。
+
+```python
+    def simple_test(self, img, img_metas, rescale=False):
+        x = self.extract_feat(img)
+        outs = self.bbox_head(x)
+        bbox_list = self.bbox_head.get_bboxes(
+            *outs, img_metas, rescale=rescale)
+        # skip post-processing when exporting to ONNX
+        if torch.onnx.is_in_onnx_export():
+            return bbox_list
+
+        bbox_results = [
+            bbox2result(det_bboxes, det_labels, self.bbox_head.num_classes)
+            for det_bboxes, det_labels in bbox_list
+        ]
+        return bbox_results
+```
+
+把同一张图片的不同level放在一起后处理，调用**_get_bboxes_single**()方法处理主逻辑（line572）
+
+```python
+        assert len(cls_scores) == len(bbox_preds)
+        # level个数5
+        num_levels = len(cls_scores)
+
+        device = cls_scores[0].device
+        # 每个level的大小
+        featmap_sizes = [cls_scores[i].shape[-2:] for i in range(num_levels)]
+        # 每个level大小应该参照点anchors
+        mlvl_anchors = self.anchor_generator.grid_anchors(
+            featmap_sizes, device=device)
+
+        result_list = []
+        # 每次处理一个图片的所有level
+        for img_id in range(len(img_metas)):
+            cls_score_list = [
+                cls_scores[i][img_id].detach() for i in range(num_levels)
+            ]
+            bbox_pred_list = [
+                bbox_preds[i][img_id].detach() for i in range(num_levels)
+            ]
+            img_shape = img_metas[img_id]['img_shape']
+            scale_factor = img_metas[img_id]['scale_factor']
+            if with_nms:
+                # some heads don't support with_nms argument
+                proposals = self._get_bboxes_single(cls_score_list,
+                                                    bbox_pred_list,
+                                                    mlvl_anchors, img_shape,
+                                                    scale_factor, cfg, rescale)
+            else:
+                proposals = self._get_bboxes_single(cls_score_list,
+                                                    bbox_pred_list,
+                                                    mlvl_anchors, img_shape,
+                                                    scale_factor, cfg, rescale,
+                                                    with_nms)
+            result_list.append(proposals)
+```
+
+line629 _get_bboxes_single把每个level分开预测分排序，保留前num_pre个anchores。
+
+```python
+            if nms_pre > 0 and scores.shape[0] > nms_pre:
+                # Get maximum scores for foreground classes.
+                if self.use_sigmoid_cls:
+                    max_scores, _ = scores.max(dim=1)
+                else:
+                    # remind that we set FG labels to [0, num_class-1]
+                    # since mmdet v2.0
+                    # BG cat_id: num_class
+                    max_scores, _ = scores[:, :-1].max(dim=1)
+                _, topk_inds = max_scores.topk(nms_pre)
+                anchors = anchors[topk_inds, :]
+                bbox_pred = bbox_pred[topk_inds, :]
+                scores = scores[topk_inds, :]
+```
+
+decoder解码pred值，需要参照anchors的大小解码对应位置的pred。
+
+```python
+            bboxes = self.bbox_coder.decode(
+                anchors, bbox_pred, max_shape=img_shape)
+```
+
+再multiclass_nms一下，不同类型的anchors不会计算IoU。具体使用了 batched_nms()方法实现，可以参照 https://mmcv.readthedocs.io/en/stable/_modules/mmcv/ops/nms.html 了解更多。
+
+```python
+        if with_nms:
+            det_bboxes, det_labels = multiclass_nms(mlvl_bboxes, mlvl_scores,
+                                                    cfg.score_thr, cfg.nms,
+                                                    cfg.max_per_img)
+```
+
+mmdetection/mmdet/core/post_processing/bbox_nms.py文件（line41）multiclass_nms()方法首先去除小于score_thr的框，将剩余的bboxes、scores、lables做nms，保留前max_num（max_per_img）个。
+
+```python
+    # filter out boxes with low scores
+    valid_mask = scores > score_thr
+	
+    inds = valid_mask.nonzero(as_tuple=False).squeeze(1)
+    bboxes, scores, labels = bboxes[inds], scores[inds], labels[inds]
+
+    dets, keep = batched_nms(bboxes, scores, labels, nms_cfg)
+
+    if max_num > 0:
+        dets = dets[:max_num]
+        keep = keep[:max_num]
+
+    return dets, labels[keep]
+```
+
+最终把结果返回成numpy ，参看mmdetection/mmdet/core/bbox/transforms.py文件对bbox2result()的解释：Convert detection results to a list of numpy arrays。
+
+```python
+ bbox_results = [
+            bbox2result(det_bboxes, det_labels, self.bbox_head.num_classes)
+            for det_bboxes, det_labels in bbox_list
+        ]
+```
+
+测试部分结束。
