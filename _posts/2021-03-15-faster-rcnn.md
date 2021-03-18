@@ -7,4 +7,4 @@ categories: [detection]
 
 ## 摘要
 
-![202103151933123456]({{ site.url }}/static/img/posts/202103151933123456.png "faster r-cnn")
+![202103151933123456](/static/img/posts/202103151933123456.png "faster r-cnn")
