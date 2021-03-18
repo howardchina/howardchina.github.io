@@ -12,7 +12,7 @@ categories: [detection]
 
 其简要网络结构图如下：
 
-![20210312002436]({{ site.url }}/static/img/posts/20210312002436.png "RetinaNet")
+![20210312002436](/static/img/posts/20210312002436.png "RetinaNet")
 
 ## 主体结构 
 
