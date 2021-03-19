@@ -10,9 +10,13 @@ categories: [detection]
 URL: https://arxiv.org/abs/2103.02603
 
 ## TL;DR
-定义“开放世界目标检测”问题，提出评估策略，提供解法：**O**pen Wo**r**ld Object D**e**tector (ORE)。
+定义“开放世界目标检测”问题，提出评估策略，提供基于Faster R-CNN的解法：**O**pen Wo**r**ld Object D**e**tector (ORE)。
 
 -----
+Detectron2 基于Faster R-CNN实现 (Github)][https://github.com/JosephKJ/OWOD]
+
+
+
 ## Motivation
 内在好奇心对学习位置实体有帮助
 
@@ -91,3 +95,101 @@ insight：识别unknown的关键是因为好奇
     $$
     \mathcal K^{t+1}=\mathcal K^{t}+\{\rm C+1,...,\rm C +n\}
     $$
+
+## 4. ORE: Open World Object Detector
+假设隐层空间不同类型间距清晰
+- 区分已知实体和未知实体
+- 新类型与其他类型不重叠
+
+模仿Faster R-CNN是2stage
+
+### 4.1 Contrastive Clustering
+
+$$
+\begin{array}{l}
+\text { Algorithm } 1 \text { Algorithm COMPUTECLUSTERINGLOSS } \\
+\hline \text { Input: Input feature for which loss is computed: } f_{c} ; \text { Feature } \\
+\text { store: } \mathcal{F}_{\text {store }} \text { ; Current iteration: } i \text { ; Class prototypes: } \mathcal{P}= \\
+\quad\left\{p_{0} \cdots p_{C}\right\} ; \text { Momentum parameter: } \eta \text { . } \\
+\text { 1: Initialise } \mathcal{P} \text { if it is the first iteration. } \\
+\text { 2: } \mathcal{L}_{\text {cont }} \leftarrow 0 \\
+\text { 3: if } i==I_{b} \text { then } \\
+\text { 4: } \quad \mathcal{P} \leftarrow \text { class-wise mean of items in } \mathcal{F}_{\text {Store }} \\
+\text { 5: } \quad \mathcal{L}_{\text {cont }} \leftarrow \text { Compute using } f_{c}, \mathcal{P} \text { and Eqn. } 1 . \\
+\text { 6: else if } i>I_{b} \text { then } \\
+\text { 7: } \quad \text { if } i \% I_{p}==0 \text { then } \\
+\text { 8: } \quad \mathcal{P}_{\text {new }} \leftarrow \text { class-wise mean of items in } \mathcal{F}_{\text {Store }} . \\
+\text { 9: } \quad \mathcal{P} \leftarrow \eta \mathcal{P}+(1-\eta) \mathcal{P}_{\text {new }} \\
+\text { 10: } \quad \mathcal{L}_{\text {cont }} \leftarrow \text { Compute using } f_{c}, \mathcal{P} \text { and Eqn. } 1 . \\
+\text { 11: return } \mathcal{L}_{\text {cont }}
+\end{array}
+$$
+
+[code: 聚类loss](https://github.com/JosephKJ/OWOD/blob/2d33beb02170036e311c76c44c2ac3588bf18841/detectron2/modeling/roi_heads/fast_rcnn.py#L617)
+
+算法1 计算聚类loss：原型向量 $p_i$ , 特征向量 $f_c$ ，未知类型label记作0
+- 热身阶段不算loss
+- 用特征仓库的均值初始化原型
+- 每隔 $I_b$ 轮次更新原型向量
+- 聚类loss：目标和同类型原型距离小，和不同类型原型距离大
+  ![](https://cdn.mathpix.com/snip/images/TrmMfHOZHMiy_AHo9PcGE8mzxalEUfdj2jc2579b6bA.original.fullsize.png)
+- 特征仓库 $\mathcal F_{store}$ 大小 CxQ，储存了每个类型Q种分类相关的特征 [update_feature_store](https://github.com/JosephKJ/OWOD/blob/2d33beb02170036e311c76c44c2ac3588bf18841/detectron2/modeling/roi_heads/fast_rcnn.py#L557)
+
+### 4.2 Auto-labelling Unknows with RPN
+#### 动机：RPN is class agnostic
+具体做法：给score高的却不和bbox重合的bbox打标签
+- score top-k 的背景proposal当作潜在目标
+
+
+N+1类，0~N-2是known，N-1是unknow，N是背景
+
+[code: 类型](https://github.com/JosephKJ/OWOD/blob/master/configs/Base-RCNN-C4-OWOD.yaml)
+, [code: proposal](https://github.com/JosephKJ/OWOD/blob/2d33beb02170036e311c76c44c2ac3588bf18841/detectron2/modeling/roi_heads/roi_heads.py)
+
+```
+if self.enable_thresold_autolabelling:
+    matched_labels_ss = matched_labels[sampled_idxs]
+    pred_objectness_score_ss = objectness_logits[sampled_idxs]
+
+    # 1) Remove FG objectness score. 2) Sort and select top k. 3) Build and apply mask.
+    mask = torch.zeros((pred_objectness_score_ss.shape), dtype=torch.bool)
+    pred_objectness_score_ss[matched_labels_ss != 0] = -1
+    sorted_indices = list(zip(
+        *heapq.nlargest(self.unk_k, enumerate(pred_objectness_score_ss), key=operator.itemgetter(1))))[0]
+    for index in sorted_indices:
+        mask[index] = True
+    gt_classes_ss[mask] = self.num_classes - 1
+```
+
+### 4.3 能量函数
+
+把proposal的score和gt class做能量变换（公式4），放入weibull分布拟合。
+
+- weibull函数拟合包 [reliability 链接](https://reliability.readthedocs.io/en/latest/Fitting%20a%20specific%20distribution%20to%20data.html?highlight=Fit_Weibull_3P)
+
+- [code 保存proposals的score到energy](https://github.com/JosephKJ/OWOD/blob/2d33beb02170036e311c76c44c2ac3588bf18841/detectron2/modeling/roi_heads/roi_heads.py#L481)
+
+$$
+E(\boldsymbol{f} ; g)=-T \log \sum_{i=1}^{\mathrm{C}} \exp \left(\frac{g_{i}(\boldsymbol{f})}{T}\right)
+$$
+
+- [code 计算lse 公式4](https://github.com/JosephKJ/OWOD/blob/2d33beb02170036e311c76c44c2ac3588bf18841/detectron2/engine/train_loop.py#L197)
+
+- 可视化weibull分布结果
+![20210319224750](/static/img/posts/20210319224750.png "可视化weibull分布结果")
+
+### 5.1 Open World评价准则
+
+#### 数据划分
+
+基础20类，每个新阶段新增20类 [code setting](https://github.com/JosephKJ/OWOD/blob/2d33beb02170036e311c76c44c2ac3588bf18841/datasets/coco_utils/balanced_ft.py)
+
+#### 评估方法
+
+$$
+\text { Wilderness Impact }(W I)=\frac{P_{\mathcal{K}}}{P_{\mathcal{K} \cup \mathcal{U}}}-1
+$$
+
+### 5.2
+
+loss的改动使unknown loss为0 [code](https://github.com/JosephKJ/OWOD/blob/2d33beb02170036e311c76c44c2ac3588bf18841/detectron2/modeling/roi_heads/fast_rcnn.py#L245)
