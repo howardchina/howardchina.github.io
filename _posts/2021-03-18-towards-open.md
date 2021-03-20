@@ -110,7 +110,7 @@ Detectron2 基于Faster R-CNN实现 [Github](https://github.com/JosephKJ/OWOD)
 
   $$
 
-  \mathcal D^t=\{{\rm X}^t, {\rm Y}^t\}
+  \mathcal D^t=\{ {\rm X}^t, {\rm Y}^t \}
 
   $$
 
