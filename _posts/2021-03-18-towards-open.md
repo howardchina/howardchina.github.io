@@ -130,7 +130,7 @@ Detectron2 基于Faster R-CNN实现 [Github](https://github.com/JosephKJ/OWOD)
 
   - 未知实体集合 ${\rm U}^t$
 
-- 更新后 $\mathcal M_{{\rm C}+n}$ 目标检测模型
+- 更新后 $\mathcal M_{ {\rm C}+n}$ 目标检测模型
 
   - 新增 n 个类别的标签
 
