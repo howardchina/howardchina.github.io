@@ -5,11 +5,9 @@ date:   2021-03-18 12:00:00 +0800
 categories: [detection]
 ---
 
-**Paper Reading Note**
-
 URL: https://arxiv.org/abs/2103.02603
 
-## TL;DR
+## 摘要
 定义“开放世界目标检测”问题，提出评估策略，提供基于Faster R-CNN的解法。在原有分类和回归loss之外增加基于 HingeEmbeddingLoss 的聚类loss - clstr loss。
 
 -----
