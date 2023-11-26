@@ -118,3 +118,16 @@ Beiji Zou, Yundi Guo, **Qi He**, Pingbo Ouyang, Ke Liu, Zailiang Chen.
 
 </div>
 </div>
+
+
+<div class='paper-box'><div class='paper-box-image'><div><img src='images/omia_2016.png' alt="omia2016" width="300px"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**Optic cup segmentation using large pixel patch based CNNs**
+
+Yundi Guo, Beiji Zou, Zailiang Chen, **Qi He**, Qing Liu, Rongchang Zhao.
+
+*Ophthalmic Medical Image Analysis International Workshop, 2016*
+
+</div>
+</div>
