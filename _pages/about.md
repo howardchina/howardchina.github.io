@@ -17,7 +17,11 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-I'm a PhD student in surgical robotics (2018.9-2024.1) supervised by Siyang Zuo (TJU) and Sophia Bano (UCL).
+**PhD Candidate at TJU**
+
+howard@tju.edu.cn
+
+I'm expected to get my PhD degree in surgical robotics (2018.9-2024.1)  at TJU advised by Prof. <a href='https://faculty.tju.edu.cn/ZuoSiyang/en/index.htm'>Siyang Zuo</a> and Prof. <a href='https://sophiabano.github.io/'>Sophia Bano</a>. I received my master degree at Computer Science and bachelor degree from Central South University advised by Prof. <a href='https://faculty.csu.edu.cn/zoubeiji/en/index.htm'>Beiji Zou</a> and Prof. <a href="https://faculty.csu.edu.cn/chenzailiang/en/index.htm">Zailiang Chen</a> .
 
 My research interest includes gastrointetinal image recognition and automatic robotic endoscopy. <a href='https://scholar.google.com/citations?user=L_fC-TMAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a>
 
@@ -65,8 +69,3 @@ My research interest includes gastrointetinal image recognition and automatic ro
 
 </div>
 </div>
-
-# 📖 Educations
-- *2018.09 - 2024.01 (now)*, Mechanical Engineering, Tianjin University. 
-- *2015.09 - 2018.06*, Computer science, Central South University.
-- *2011.09 - 2015.06*, Software Engineering, Central South University. 
