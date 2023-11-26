@@ -21,7 +21,7 @@ redirect_from:
 
 howard@tju.edu.cn
 
-I'm expected to get my PhD degree in surgical robotics (2018.9-2024.1)  at TJU advised by Prof. <a href='https://faculty.tju.edu.cn/ZuoSiyang/en/index.htm'>Siyang Zuo</a> and Prof. <a href='https://sophiabano.github.io/'>Sophia Bano</a>. I received my master degree at Computer Science and bachelor degree from Central South University advised by Prof. <a href='https://faculty.csu.edu.cn/zoubeiji/en/index.htm'>Beiji Zou</a> and Prof. <a href="https://faculty.csu.edu.cn/chenzailiang/en/index.htm">Zailiang Chen</a> .
+I'm expected to get my PhD degree in surgical robotics (2018.9-2024.1)  at TJU advised by Prof. <a href='https://faculty.tju.edu.cn/ZuoSiyang/en/index.htm'>Siyang Zuo</a> and Prof. <a href='https://sophiabano.github.io/'>Sophia Bano</a>. I received my master degree at Computer Science and bachelor degree at Software Engineering from Central South University advised by Prof. <a href='https://faculty.csu.edu.cn/zoubeiji/en/index.htm'>Beiji Zou</a> and Prof. <a href="https://faculty.csu.edu.cn/chenzailiang/en/index.htm">Zailiang Chen</a>.
 
 My research interest includes gastrointetinal image recognition and automatic robotic endoscopy. <a href='https://scholar.google.com/citations?user=L_fC-TMAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a>
 
@@ -40,6 +40,18 @@ My research interest includes gastrointetinal image recognition and automatic ro
 
 *Computers in Biology and Medicine, 2023*
 
+</div>
+</div>
+
+
+<div class='paper-box'><div class='paper-box-image'><div><img src='images/icpr_2021.png' alt="icpr_2021" width="300px"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**Hybrid Loss with Network Trimming for Disease Recognition in Gastrointestinal Endoscopy**
+
+**Qi He**, Sophia Bano, Jing Liu, Wentian Liu, Danail Stoyanov, Siyang Zuo.
+
+*ICPR International Workshops and Challenges, 2021*
 
 </div>
 </div>
@@ -53,6 +65,31 @@ My research interest includes gastrointetinal image recognition and automatic ro
 
 *International Journal of Computer Assisted Radiology and Surgery, 2020*
 
+</div>
+</div>
+
+
+<div class='paper-box'><div class='paper-box-image'><div><img src='images/tbme_2020.png' alt="tbme2020" width="300px"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**Locally adaptive total p-variation regularization for non-rigid image registration with sliding motion**
+
+Lun Gong, Luwen Duan, Yakang Dai, **Qi He**, Siyang Zuo, Tianxiao Fu, Xiaodong Yang, Jian Zheng.
+
+*IEEE Transactions on Biomedical Engineering, 2020*
+
+</div>
+</div>
+
+
+<div class='paper-box'><div class='paper-box-image'><div><img src='images/bgidb_2018.png' alt="bgidb2018" width="300px"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**BGIDB: A fundus ground truth building tool with automatic DDLS classification for glaucoma research**
+
+Beiji Zou, Yundi Guo, Zailiang Chen, **Qi He**, Chengzhang Zhu, Pingbo Ouyang. [**code**](https://github.com/howardchina/BGIDB)
+
+*Journal of Central South University, 2018*
 
 </div>
 </div>
@@ -66,6 +103,18 @@ My research interest includes gastrointetinal image recognition and automatic ro
 
 *International Conference on Image Processing (ICIP), 2018*
 
+</div>
+</div>
+
+
+<div class='paper-box'><div class='paper-box-image'><div><img src='images/jcst_2018.png' alt="jcst2018" width="300px"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**3D filtering by block matching and convolutional neural network for image denoising**
+
+Beiji Zou, Yundi Guo, **Qi He**, Pingbo Ouyang, Ke Liu, Zailiang Chen.
+
+*Journal of Computer Science and Technology, 2018*
 
 </div>
 </div>
