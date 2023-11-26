@@ -19,18 +19,18 @@ redirect_from:
 
 I'm a PhD student in surgical robotics (2018.9-2024.1) supervised by Siyang Zuo (TJU) and Sophia Bano (UCL).
 
-My research interest includes gastrointetinal image recognition and automatic robotic endoscopy. <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a>
+My research interest includes gastrointetinal image recognition and automatic robotic endoscopy. <a href='https://scholar.google.com/citations?user=L_fC-TMAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a>
 
 
 # 🔥 News
-- *2023.10*: &nbsp;🎉🎉 "MonoLoT" submitted to IEEE Journal of Biomedical and Health Informatics (under review). 
+- *2023.10*: &nbsp;🎉🎉 "MonoLoT: Self-Supervised Monocular Depth Estimation in Low-Texture Scenes for Automatic Robotic Endoscopy" submitted to IEEE Journal of Biomedical and Health Informatics (under review). 
 
 # 📝 Publications 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Computers in Biology and Medicine</div><img src='images/500x300.png' alt="sym" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Computers in Biology and Medicine 2023</div><img src='images/cibm_2023.png' alt="sym" width="500px"></div></div>
 <div class='paper-box-text' markdown="1">
 
-[Query^2](https://openaccess.thecvf.com/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf)
+[Query<sup>2</sup>]()
 
 **Qi He**, Sophia Bano, Jing Liu, Wentian Liu, Danail Stoyanov, Siyang Zuo
 
