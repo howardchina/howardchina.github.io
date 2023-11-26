@@ -40,6 +40,19 @@ My research interest includes gastrointetinal image recognition and automatic ro
 </div>
 </div>
 
+<div class='paper-box'><div class='paper-box-image'><div><img src='images/IJCARS_2020.jpg' alt="ijcars2023" width="300px"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**Deep learning-based anatomical site classification for upper gastrointestinal endoscopy**
+
+**Qi He**, Sophia Bano, Omer F Ahmad, Bo Yang, Xin Chen, Pietro Valdastri, Laurence B Lovat, Danail Stoyanov, Siyang Zuo.
+
+*International journal of computer assisted radiology and surgery, 2020*
+
+
+</div>
+</div>
+
 
 # 📖 Educations
 - *2018.09 - 2024.01 (now)*, Mechanical Engineering, Tianjin University. 
