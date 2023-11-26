@@ -27,7 +27,7 @@ My research interest includes gastrointetinal image recognition and automatic ro
 
 # 📝 Publications 
 
-<div class='paper-box'><div class='paper-box-image'><div><img src='images/cibm_2023.jpg' alt="query2_cibm2023" width="500px"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><img src='images/cibm_2023.jpg' alt="query2_cibm2023" width="300px"></div></div>
 <div class='paper-box-text' markdown="1">
 
 **Query2: Query over queries for improving gastrointestinal stromal tumour detection in an endoscopic ultrasound**
