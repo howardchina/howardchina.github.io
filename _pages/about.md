@@ -27,14 +27,15 @@ My research interest includes gastrointetinal image recognition and automatic ro
 
 # 📝 Publications 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Computers in Biology and Medicine 2023</div><img src='images/cibm_2023.jpg' alt="query2_cibm2023" width="500px"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><img src='images/cibm_2023.jpg' alt="query2_cibm2023" width="500px"></div></div>
 <div class='paper-box-text' markdown="1">
 
-Query2: Query over queries for improving gastrointestinal stromal tumour detection in an endoscopic ultrasound
+**Query2: Query over queries for improving gastrointestinal stromal tumour detection in an endoscopic ultrasound**
 
-**Qi He**, Sophia Bano, Jing Liu, Wentian Liu, Danail Stoyanov, Siyang Zuo
+**Qi He**, Sophia Bano, Jing Liu, Wentian Liu, Danail Stoyanov, Siyang Zuo. [**code**](https://github.com/howardchina/query2)
 
-[**Project**](https://github.com/howardchina/query2) <strong><span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span></strong>
+*Computers in Biology and Medicine, 2023*
+
 
 </div>
 </div>
