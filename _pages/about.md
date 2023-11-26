@@ -27,7 +27,7 @@ My research interest includes gastrointetinal image recognition and automatic ro
 
 # 📝 Publications 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Computers in Biology and Medicine 2023</div><img src='images/cibm_2023.png' alt="sym" width="500px"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Computers in Biology and Medicine 2023</div><img src='images/cibm_2023.jpg' alt="query2_cibm2023" width="500px"></div></div>
 <div class='paper-box-text' markdown="1">
 
 [Query<sup>2</sup>]()
@@ -39,23 +39,8 @@ My research interest includes gastrointetinal image recognition and automatic ro
 </div>
 </div>
 
-<!---
-# 🎖 Honors and Awards
-- *2021.10* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
-- *2021.09* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
--->
 
 # 📖 Educations
 - *2018.09 - 2024.01 (now)*, Mechanical Engineering, Tianjin University. 
 - *2015.09 - 2018.06*, Computer science, Central South University.
 - *2011.09 - 2015.06*, Software Engineering, Central South University. 
-
-<!---
-# 💬 Invited Talks
-- *2021.06*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
-- *2021.03*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet.  \| [\[video\]](https://github.com/)
-
-# 💻 Internships
-- *2019.05 - 2020.02*, [Lorem](https://github.com/), China.
-
--->
