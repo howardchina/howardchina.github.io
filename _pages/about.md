@@ -65,7 +65,6 @@ My research interest includes gastrointetinal image recognition and automatic ro
 
 </div>
 </div>
-He, Qi, Beiji Zou, Chengzhang Zhu, Xiyao Liu, Hongpu Fu, and Lei Wang. "Multi-Label Classification Scheme Based on Local Regression for Retinal Vessel Segmentation." In 2018 25th IEEE International Conference on Image Processing (ICIP), pp. 2765-2769. IEEE, 2018.
 
 # 📖 Educations
 - *2018.09 - 2024.01 (now)*, Mechanical Engineering, Tianjin University. 
