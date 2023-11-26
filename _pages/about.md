@@ -47,12 +47,25 @@ My research interest includes gastrointetinal image recognition and automatic ro
 
 **Qi He**, Sophia Bano, Omer F Ahmad, Bo Yang, Xin Chen, Pietro Valdastri, Laurence B Lovat, Danail Stoyanov, Siyang Zuo.
 
-*International journal of computer assisted radiology and surgery, 2020*
+*International Journal of Computer Assisted Radiology and Surgery, 2020*
 
 
 </div>
 </div>
 
+<div class='paper-box'><div class='paper-box-image'><div><img src='images/ICIP_2018.jpg' alt="icip2018" width="300px"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**Multi-Label Classification Scheme Based on Local Regression for Retinal Vessel Segmentation**
+
+**Qi He**, Beiji Zou, Chengzhang Zhu, Xiyao Liu, Hongpu Fu, and Lei Wang.
+
+*International Conference on Image Processing (ICIP), 2018*
+
+
+</div>
+</div>
+He, Qi, Beiji Zou, Chengzhang Zhu, Xiyao Liu, Hongpu Fu, and Lei Wang. "Multi-Label Classification Scheme Based on Local Regression for Retinal Vessel Segmentation." In 2018 25th IEEE International Conference on Image Processing (ICIP), pp. 2765-2769. IEEE, 2018.
 
 # 📖 Educations
 - *2018.09 - 2024.01 (now)*, Mechanical Engineering, Tianjin University. 
