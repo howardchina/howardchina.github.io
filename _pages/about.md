@@ -23,7 +23,7 @@ qihe@cuhk.edu.hk
 
 I'm a Postdoctoral Fellow at CUHK, reporting to Prof. <a href='https://www.cse.cuhk.edu.hk/~qdou/index.html'>Qi Dou</a>. I recieved my PhD degree in surgical robotics (2018.9-2024.1) at TJU co-advised by Prof. <a href='https://faculty.tju.edu.cn/ZuoSiyang/en/index.htm'>Siyang Zuo</a> and Prof. <a href='https://sophiabano.github.io/'>Sophia Bano</a>. More before, I received my master degree at Computer Science and bachelor degree at Software Engineering from Central South University advised by Prof. <a href='https://faculty.csu.edu.cn/zoubeiji/en/index.htm'>Beiji Zou</a> and Prof. <a href="https://faculty.csu.edu.cn/chenzailiang/en/index.htm">Zailiang Chen</a>.
 
-My research interest includes endoscopy image recognition and automatic robotic endoscopy.
+My research interest includes endoscopic image recognition and automatic robotic endoscopy.
 
 
 # 🔥 News
