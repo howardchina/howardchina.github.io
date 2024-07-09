@@ -17,18 +17,17 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-**PhD Candidate at TJU**
+**Postdoctoral Fellow at CUHK**
 
-howard@tju.edu.cn
+qihe@cuhk.edu.hk
 
-I'm expected to get my PhD degree in surgical robotics (2018.9-2024.1)  at TJU advised by Prof. <a href='https://faculty.tju.edu.cn/ZuoSiyang/en/index.htm'>Siyang Zuo</a> and Prof. <a href='https://sophiabano.github.io/'>Sophia Bano</a>. I received my master degree at Computer Science and bachelor degree at Software Engineering from Central South University advised by Prof. <a href='https://faculty.csu.edu.cn/zoubeiji/en/index.htm'>Beiji Zou</a> and Prof. <a href="https://faculty.csu.edu.cn/chenzailiang/en/index.htm">Zailiang Chen</a>.
+I'm a Postdoctoral Fellow at CUHK, reporting to Prof. <a href='https://www.cse.cuhk.edu.hk/~qdou/index.html'>Qi Dou</a>. I recieved my PhD degree in surgical robotics (2018.9-2024.1) at TJU co-advised by Prof. <a href='https://faculty.tju.edu.cn/ZuoSiyang/en/index.htm'>Siyang Zuo</a> and Prof. <a href='https://sophiabano.github.io/'>Sophia Bano</a>. More before, I received my master degree at Computer Science and bachelor degree at Software Engineering from Central South University advised by Prof. <a href='https://faculty.csu.edu.cn/zoubeiji/en/index.htm'>Beiji Zou</a> and Prof. <a href="https://faculty.csu.edu.cn/chenzailiang/en/index.htm">Zailiang Chen</a>.
 
-My research interest includes gastrointetinal image recognition and automatic robotic endoscopy.
+My research interest includes endoscopy image recognition and automatic robotic endoscopy.
 
 
 # 🔥 News
 - *2024.7*: &nbsp;🎉🎉 "MonoLoT: Self-Supervised Monocular Depth Estimation in Low-Texture Scenes for Automatic Robotic Endoscopy" accepted to IEEE Journal of Biomedical and Health Informatics.
-- *2023.10*: &nbsp;🎉🎉 "MonoLoT: Self-Supervised Monocular Depth Estimation in Low-Texture Scenes for Automatic Robotic Endoscopy" submitted to IEEE Journal of Biomedical and Health Informatics (under review).
 
 # 📝 Publications 
 
