@@ -23,12 +23,12 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 author:
   name             : "Qi He"
   avatar           : "images/android-chrome-512x512.png"
-  bio              : "Tianjin University"
-  location         : "Tianjin, China"
+  bio              : "Chinese University of Hong Kong"
+  location         : "Hong Kong, China"
   employer         :
   pubmed           : 
   googlescholar    : "https://scholar.google.com/citations?user=L_fC-TMAAAAJ"
-  email            : "howard@tju.edu.cn"
+  email            : "qihe@cuhk.edu.hk"
   researchgate     :  # e.g., "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
