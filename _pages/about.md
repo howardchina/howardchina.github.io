@@ -27,9 +27,23 @@ My research interest includes gastrointetinal image recognition and automatic ro
 
 
 # 🔥 News
-- *2023.10*: &nbsp;🎉🎉 "MonoLoT: Self-Supervised Monocular Depth Estimation in Low-Texture Scenes for Automatic Robotic Endoscopy" submitted to IEEE Journal of Biomedical and Health Informatics (under review). 
+- *2024.7*: &nbsp;🎉🎉 "MonoLoT: Self-Supervised Monocular Depth Estimation in Low-Texture Scenes for Automatic Robotic Endoscopy" accepted to IEEE Journal of Biomedical and Health Informatics.
+- *2023.10*: &nbsp;🎉🎉 "MonoLoT: Self-Supervised Monocular Depth Estimation in Low-Texture Scenes for Automatic Robotic Endoscopy" submitted to IEEE Journal of Biomedical and Health Informatics (under review).
 
 # 📝 Publications 
+
+<div class='paper-box'><div class='paper-box-image'><div><img src='images/jbhi_2024.jpg' alt="monolot_jbhi2024" width="300px"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**MonoLoT: Self-Supervised Monocular Depth Estimation in Low-Texture Scenes for Automatic Robotic Endoscopy**
+
+**Qi He**, Guang Feng, Sophia Bano, Danail Stoyanov, Siyang Zuo. [**code**](https://github.com/howardchina/monolot)
+
+*IEEE Journal of Biomedical and Health Informatics, 2024*
+
+</div>
+</div>
+
 
 <div class='paper-box'><div class='paper-box-image'><div><img src='images/cibm_2023.jpg' alt="query2_cibm2023" width="300px"></div></div>
 <div class='paper-box-text' markdown="1">
